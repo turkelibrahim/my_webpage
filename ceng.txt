@@ -1,0 +1,216 @@
+Page 1 of 7 
+ 
+ 
+        
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                                 Project Report 
+ 
+ 
+ 
+                                 Online Skill-Based Quiz System 
+                                                       
+ 
+                                                                    
+ 
+ 
+ 
+ 
+                         Student Name: İbrahim Türkel  
+ 
+                              Student ID: 220201047 
+ 
+ 
+ 
+                         Student Name: Kerem Çermikli  
+ 
+                              Student ID: 230201028 
+ 
+ 
+ 
+                         Student Name: Yiğithan Erdoğan  
+ 
+                              Student ID: 230201048 
+
+Page 2 of 7 
+ 
+ 
+ 
+1. INTRODUCTION 
+   This report outlines the development process, goals, and outcomes of our Online   
+Skill-Based Quiz System. We undertook this project to create a reliable digital 
+assessment tool that solves common issues found in traditional testing methods, and 
+poor user engagement. 
+1.1 Purpose 
+   Our main goal was to build a fully functional web platform where users can take 
+subject-specific quizzes under controlled conditions, and administrators can easily 
+manage the content. 
+   Our motivation was to provide a fair, accessible, and secure testing environment 
+that could theoretically be used for real classroom assessments. 
+1.2 Project Scope 
+Included Features (What we delivered): 
+• Secure Access: We built a registration and login system that protects user 
+passwords using password_hash rather than storing them in plain text. 
+ 
+• Quiz Engine: Admins can create quizzes with specific time limits and subjects. 
+The system supports both multiple-choice and short-answer questions. 
+ 
+• Real-Time Testing: When a user takes a quiz, a JavaScript timer counts down. 
+If the time runs out, the system automatically submits their answers to ensure 
+fairness. 
+ 
+• Gamification: To make it more engaging than a standard test, we added a 
+Leaderboard to show top scores and a Badges system (like Expert or 
+Ambitious) that users earn by completing quizzes. 
+ 
+• History & Profiles: Users can visit their profile to see every quiz they've taken, 
+their score percentages, and the badges they have collected. 
+ 
+Out of Scope (Constraints): 
+Page 3 of 7 
+ 
+• We did not develop a mobile app; the project is a responsive web application. 
+1.3 Innovative Aspect of the Project 
+    What sets our project apart is the combination of Capacity Management and 
+Gamification. Unlike static forms, our system is capacity-aware, meaning it can 
+control quiz participation based on available resources.  
+  Furthermore, by moving away from boring interface designs and adding competitive 
+elements like leaderboards and badges, we turned a standard assessment tool into a 
+more modern, engaging experience for students. 
+1.4 Global Goals for Sustainable Development (SDG Alignment) 
+    1.4.1 Impacts on Society, Health & Safety, Economy, Sustainability, and the 
+Environment 
+   Socially, our platform democratizes education by allowing users to test their skills 
+from anywhere, removing physical barriers to learning. Environmentally, moving 
+assessments online significantly reduces paper waste. Economically, automating the 
+grading process saves time and administrative costs compared to manual exam 
+processing. 
+1.4.2 Project Formulation for Global Goals 
+    Our project aligns closely with SDG 4: Quality Education. By building a scalable, 
+open-source assessment tool, we are contributing to the digital infrastructure needed 
+for modern education. It ensures that students can receive standardized feedback on 
+their skills, regardless of their location. 
+2. LITERATURE REVIEW 
+    Before starting, we looked at existing quiz platforms. Most simple solutions just 
+calculate a score at the end without saving data, while professional platforms are 
+often paid services. Research in web-based learning highlights the importance of 
+usability and data persistence. 
+      
+   Our project fills the gap between these two extremes. We used a robust PHP 
+backend and MySQL database to ensure that every attempt is recorded permanently. 
+Unlike basic JavaScript quizzes that can be cheated, our system validates scores on 
+the server side, ensuring a reliable assessment environment. 
+ 
+ 
+ 
+Page 4 of 7 
+ 
+ 
+3. PROPOSED METHOD 
+    We adopted a structured, layered approach to build this application, ensuring 
+the code was clean and manageable. 
+Technologies Used: 
+• Backend: We used PHP  for all the server-side logic, including calculating 
+scores and managing sessions. 
+ 
+• Database: We designed a normalized MySQL database to store Users, 
+Quizzes, Questions, and Attempts efficiently. 
+ 
+• Frontend: We used HTML and CSS with a custom Dark Mode theme to make 
+it look modern. We utilized JavaScript specifically for the countdown timer to 
+handle the client-side exam logic. 
+How it Works: 
+ 
+1. Database:  We first designed tables like attempts and answers to link users to 
+their quiz results. 
+ 
+2. Auth:  We created a central auth.php file so we could easily protect pages like the 
+Admin Panel from unauthorized users. 
+ 
+3. Quiz Logic:  The take_quiz.php page loads the questions, and submit_quiz.php 
+processes the results in a transaction to ensure no data is lost. 
+ 
+ 
+4. IMPLEMENTATION AND RESULTS 
+     We successfully implemented all the core features we planned at the beginning of 
+the semester. 
+4.1 Test Results 
+Page 5 of 7 
+ 
+• Functionality: We tested the entire flow—registering a new user, logging in, 
+taking a quiz, and checking the leaderboard. Everything worked as expected. 
+ 
+• Data Integrity: We verified that when a user finishes a quiz, their score and 
+detailed answers are correctly saved in the database history. 
+ 
+• Timer: We confirmed that if a user tries to stay on the quiz page longer than 
+the allowed time, the JavaScript timer forces the submission. 
+4.2 Comparative Results & Performance Evaluation 
+• Reliability: Compared to a simple HTML form, our system is much more 
+reliable because it calculates scores on the server. 
+ 
+• Performance: The application is lightweight. By using optimized SQL queries 
+and a simple CSS file, the pages load very quickly even with multiple 
+questions. 
+5. TEAMWORK AND COMMUNICATION 
+    5.1 Team Roles and Collaboration 
+ To complete the project efficiently, we divided the tasks based on our 
+strengths: 
+• Backend Logic: İbrahim Türkel & Yiğithan Erdoğan & Kerem Çermikli focused 
+on the PHP coding and ensuring the login/quiz logic worked correctly. 
+ 
+• Database Design: Kerem Çermikli & İbrahim Türkel & Yiğithan Erdoğan  
+handled the database schema and relationships between tables. 
+ 
+ 
+• Frontend & Design: Yiğithan Erdoğan & İbrahim Türkel & Kerem Çermikli 
+worked on the UI and the JavaScript timer. 
+•  
+• Reporting: Kerem Çermikli & İbrahim Türkel & Yiğithan Erdoğan compiled the 
+documentation and reports. 
+5.2 Communication and Reporting 
+Page 6 of 7 
+ 
+Since we couldn't always work side-by-side, we relied on WhatsApp for daily updates 
+and quick questions. We also held online meetings (via Teams) to discuss bigger 
+technical decisions, like how to structure the database. This constant communication 
+helped us resolve bugs quickly. 
+6. CONCLUSION 
+In conclusion, we successfully designed and built the Online Skill-Based Quiz 
+System. We managed to go beyond a simple form-filling website by adding 
+features like capacity management and gamification elements. 
+Limitations and Future Work: 
+• Current Limitations: Right now, the system only supports exact-match grading 
+for text answers, which can be strict if a user makes a typo. 
+• Future Improvements: In the future, we would love to add real-time 
+notifications for admins and perhaps an adaptive mode where questions get 
+harder as the user answers correctly. 
+ 
+ 
+ 
+  
+ 
+
+Page 7 of 7 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                                                                                                                             

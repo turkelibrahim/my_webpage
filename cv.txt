@@ -1,0 +1,69 @@
+İBRAHİM TÜRKEL 
+Telefon: +90 542 588 37 87 | E-posta: ibrahimturkel18@gmail.com | Adres: Ankara, 
+Türkiye LinkedIn: linkedin.com/in/ibrahim-türkel | GitHub: github.com/Trklibrahim  
+ 
+Eğitim 
+Ankara Bilim Üniversitesi - Bilgisayar Mühendisliği (%100 İngilizce) | 2022 - Günümüz 
+• Mevcut Durum: 3. Sınıf Öğrencisi.  
+• Beklenen Mezuniyet: 2027.  
+ 
+İş Deneyimi 
+TÜRKEL ZİRAİ ÜRÜNLER TARIM PETROL - Satış ve Operasyon | Ağustos 2020 - Eylül 2023  
+• Saha operasyon süreçlerinin koordinasyonu ve yönetimsel takibi sağlandı.  
+• Müşteri ilişkileri yönetimi ve profesyonel iletişim süreçlerinde aktif rol alındı.  
+• Operasyonel verimliliğin artırılması amacıyla iş akış süreçlerine analitik katkıda 
+bulunuldu.  
+ 
+Projeler ve Yarışmalar 
+Yapay Zeka Destekli İngilizce Eğitim Platformu 
+• PHP tabanlı, ölçeklenebilir ve yüksek performanslı bir backend mimarisi 
+tasarlanmış ve geliştirilmiştir.  
+• Kullanıcı performans verilerini analiz ederek dinamik içerik sunan algoritmalar 
+kurgulanmıştır.  
+• Kod tekrarını minimize etmek amacıyla DRY (Don't Repeat Yourself) prensibi 
+uygulanmıştır.  
+• Sistem, modüler yapı prensiplerine uygun olarak genişletilebilir şekilde 
+kurgulanmıştır.  
+Yapay Zeka Tabanlı Kariyer Analiz Sistemi 
+• PHP ve MySQL teknolojileri kullanılarak veri odaklı bir backend sistemi inşa 
+edilmiştir.  
+• Veri erişim performansını artırmak amacıyla ileri seviye sorgu optimizasyonları 
+gerçekleştirilmiştir.  
+• Kullanıcı verilerini analiz ederek kişiselleştirilmiş kariyer projeksiyonları sunan 
+bir yapı oluşturulmuştur.  
+• Yüksek performanslı veri işleme için ölçeklenebilir veri modeli tasarlanmıştır.  
+ 
+Teknik Yetkinlikler 
+Alan Detaylar 
+Programlama C++, Python, PHP , Java, C#  
+Backend & Mimari RESTful API Tasarımı, Asenkron Sistemler, Sunucu Tarafı 
+Mimariler  
+Veritabanı PostgreSQL, MySQL, İlişkisel Veritabanı Tasarımı, Sorgu 
+Optimizasyonu  
+Web & Frontend HTML5, CSS3  
+Bilgisayar Bilimi Veri Yapıları, Algoritma Tasarımı, Karmaşıklık (Big-O) Analizi 
+Araçlar & 
+Standartlar Git, GitHub, XAMPP , phpMyAdmin, SOLID, Clean Code, DRY  
+Sistem & Güvenlik Linux İşletim Sistemi Yönetimi, Siber Güvenlik Temelleri  
+ 
+Profesyonel Yetkinlikler 
+• Analitik düşünme ve sistematik problem çözme becerisi.  
+• Karmaşık sistem analizi ve ölçeklenebilir mimari tasarımı.  
+• Sürekli öğrenme ve teknolojik adaptasyon motivasyonu.  
+• SOLID ve Clean Code gibi mühendislik prensiplerine tam bağlılık.  
+ 
+Kariyer ve Araştırma Hedefleri 
+Temel kariyer hedefim, yüksek performanslı backend sistem mimarileri ve sistem 
+tasarımı konularında uzmanlaşmaktır. Mühendislik prensiplerini odağa alarak, büyük 
+veri setlerini işleyen ve gerçek dünya problemlerine sürdürülebilir, performanslı 
+çözümler sunan sistemler geliştirmeyi amaçlıyorum.  
+ 
+Diller 
+• Türkçe: Ana Dil.  
+• İngilizce: B1/B2 Seviyesi (%100 İngilizce Mühendislik müfredatı dahilinde 
+profesyonel yetkinlik).  
+ 
+Referanslar 
+Ömer Türkel - Şirket Müdürü, Türkel Zirai Ürünleri 
+ Telefon: +90 541 588 37 87  |  E-posta: oturkel63@outlook.com 
+ 
