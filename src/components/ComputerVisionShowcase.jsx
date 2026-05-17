@@ -1,253 +1,534 @@
-import React, { useState, useEffect, Suspense, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, Suspense } from 'react';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls } from '@react-three/drei';
-import { Hand, ZoomIn, RotateCcw, User, Terminal, Cpu, Download } from 'lucide-react';
+import { Cpu, Hand, Download } from 'lucide-react';
 import useHandTracking from '../hooks/useHandTracking';
 import HologramGlobe from './HologramGlobe';
 
+// ─── Feature flag — sadece geliştirici modunda true yap ──────────────────────
+const DEBUG_GESTURE = false;
+
 export default function ComputerVisionShowcase() {
-  const { isReady, isCameraActive, videoRef, canvasRef, handState, startCamera } = useHandTracking();
-  
-  const [globeMode, setGlobeMode] = useState('cyberpunk'); 
-  const [theme, setTheme] = useState('night'); 
-  
-  // Easter Eggs & New States
-  const [logs, setLogs] = useState([]);
+  const {
+    isReady,
+    isCameraActive,
+    videoRef,
+    canvasRef,
+    handState,
+    startCamera,
+    stopCamera,
+  } = useHandTracking();
+
   const [isArchOpen, setIsArchOpen] = useState(false);
-  const [showCV, setShowCV] = useState(false);
-  const [isMatrixColor, setIsMatrixColor] = useState(false);
-
-  // Easter Egg & Logging Logic
-  useEffect(() => {
-    if (!isCameraActive || !handState.isPresent) return;
-
-    // Terminal Logging
-    const newLog = `> GESTURE: ${handState.currentGesture} | COORD: {x: ${handState.handCenter.x.toFixed(2)}, y: ${handState.handCenter.y.toFixed(2)}}`;
-    setLogs(prev => {
-      // Don't add if it's the exact same as the last one to avoid spam
-      if (prev.length > 0 && prev[prev.length - 1] === newLog) return prev;
-      const updated = [...prev, newLog];
-      if (updated.length > 6) updated.shift();
-      return updated;
-    });
-
-    // PEACE -> Matrix Green Color Shift
-    if (handState.currentGesture === 'PEACE') {
-      setIsMatrixColor(true);
-    } else if (handState.currentGesture !== 'NONE') {
-      // Keep it green for a while or revert if other gestures?
-      // Let's make it so you have to hold peace to keep it green, or maybe toggle it.
-      // A toggle is cooler:
-      // Wait, let's just make it stay green while PEACE is held.
-    }
-    if (handState.currentGesture !== 'PEACE') {
-        setIsMatrixColor(false);
-    }
-
-    // THUMBS_UP -> Show CV
-    if (handState.currentGesture === 'THUMBS_UP') {
-      setShowCV(true);
-    }
-  }, [handState.currentGesture, handState.handCenter, isCameraActive, handState.isPresent]);
-
-
-  const ts = {
-    bg: '#050b14',
-    grid: isMatrixColor ? 'rgba(16, 185, 129, 0.05)' : 'rgba(0, 242, 254, 0.03)',
-    gradient: isMatrixColor ? 'rgba(16, 185, 129, 0.1)' : 'rgba(139, 92, 246, 0.1)',
-    text: isMatrixColor ? '#10b981' : '#8ba2b2',
-    accent: isMatrixColor ? '#10b981' : '#00f2fe'
-  };
 
   return (
-    <section id="vision-showcase" style={{ 
-      position: 'relative', height: '100vh', width: '100vw', overflow: 'hidden', 
-      backgroundColor: ts.bg,
-      backgroundImage: `linear-gradient(${ts.grid} 1px, transparent 1px), linear-gradient(90deg, ${ts.grid} 1px, transparent 1px), radial-gradient(circle at 50% 50%, ${ts.gradient} 0%, transparent 60%)`,
-      backgroundSize: '30px 30px, 30px 30px, 100% 100%',
-      transition: 'all 0.5s ease'
-    }}>
-
-      {/* Scrolling Code Background */}
-      <div style={{
-        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 0, 
-        opacity: 0.1, color: ts.accent, fontFamily: 'monospace', fontSize: '0.75rem', whiteSpace: 'pre', pointerEvents: 'none',
-        transition: 'color 0.5s ease'
-      }}>
-        <motion.div initial={{ y: 0 }} animate={{ y: '-50%' }} transition={{ repeat: Infinity, ease: 'linear', duration: 60 }}>
-          {Array.from({ length: 150 }).map((_, i) => (
-            <div key={i} style={{ paddingLeft: `${Math.random() * 80}%`, marginBottom: '15px' }}>
-              {Math.random() > 0.5 ? "DATA_STREAM_OK" : "SYS_OP_CODE"} 0x{Math.floor(Math.random()*16777215).toString(16).toUpperCase()}
-            </div>
-          ))}
-        </motion.div>
-      </div>
-      
-      {/* 3D Background Globe */}
-      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
+    <section
+      id="vision-showcase"
+      style={{
+        position: 'relative',
+        height: '100vh',
+        width: '100vw',
+        overflow: 'hidden',
+        backgroundColor: '#050b14',
+        backgroundImage:
+          'linear-gradient(rgba(0,242,254,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,242,254,0.03) 1px, transparent 1px), radial-gradient(circle at 50% 50%, rgba(139,92,246,0.08) 0%, transparent 60%)',
+        backgroundSize: '30px 30px, 30px 30px, 100% 100%',
+      }}
+    >
+      {/* ── 3D Globe background ────────────────────────────────────────────── */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
         <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
           <ambientLight intensity={0.2} />
-          <directionalLight position={[10, 10, 5]} intensity={1} />
+          <directionalLight position={[10, 10, 5]} intensity={0.8} />
           <Environment preset="city" />
           <Suspense fallback={null}>
-            <HologramGlobe handState={handState} globeMode={globeMode} matrixMode={isMatrixColor} />
+            <HologramGlobe handState={handState} />
           </Suspense>
           <OrbitControls enableZoom={false} enablePan={false} />
         </Canvas>
       </div>
 
-      {/* Floating Data Tags (HUD) */}
-      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 5, color: ts.text, fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '1px' }}>
-        
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ position: 'absolute', top: '20%', left: '15%', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          GESTURE: <span style={{ color: ts.accent, fontWeight: '500', textShadow: `0 0 8px ${ts.accent}60` }}>{handState.currentGesture !== 'NONE' ? handState.currentGesture : 'KONTROL'}</span> <Hand size={14} color={ts.accent} />
-        </motion.div>
+      {/* ── Hand detected status badge (top-left) ────────────────────────── */}
+      <AnimatePresence>
+        {isCameraActive && (
+          <Motion.div
+            key="tracking-badge"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.4 }}
+            style={{
+              position: 'absolute',
+              top: '1.5rem',
+              left: '1.5rem',
+              zIndex: 20,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: 'rgba(5,10,20,0.7)',
+              backdropFilter: 'blur(10px)',
+              border: handState.isPresent
+                ? '1px solid rgba(16,185,129,0.4)'
+                : '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '8px',
+              padding: '0.5rem 1rem',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '0.72rem',
+              color: handState.isPresent ? '#10b981' : '#8ba2b2',
+              transition: 'border-color 0.4s, color 0.4s',
+            }}
+          >
+            <Hand size={13} />
+            {handState.isPresent ? 'HAND DETECTED' : 'TRACKING ACTIVE'}
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ position: 'absolute', top: '20%', right: '15%', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <RotateCcw size={14} color={ts.text} /> ROTATION: <span style={{ color: ts.accent, fontWeight: '500', textShadow: `0 0 8px ${ts.accent}60` }}>ACTIVE</span>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ position: 'absolute', top: '50%', left: '12%', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          ZOOM: %{isCameraActive ? Math.max(100, Math.round((0.5 + handState.pinchDistance * 10) * 100)) : 150} <ZoomIn size={14} color={ts.accent} />
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ position: 'absolute', top: '65%', right: '12%', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <User size={14} color={ts.accent} /> MEMBER: <span style={{ color: ts.accent, fontWeight: '500', textShadow: `0 0 8px ${ts.accent}60` }}>KXIEF</span>
-        </motion.div>
-      </div>
-
-      {/* Real-time Data Terminal (Matrix Effect) */}
-      <div style={{ position: 'absolute', bottom: '2rem', left: '2rem', zIndex: 10, width: '320px', pointerEvents: 'none' }}>
-        <div style={{ 
-          background: 'rgba(5, 10, 20, 0.7)', backdropFilter: 'blur(10px)', border: `1px solid ${ts.accent}40`, 
-          borderTop: `2px solid ${ts.accent}`, borderRadius: '8px', padding: '1rem', fontFamily: 'monospace', fontSize: '0.7rem', color: ts.accent 
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.8rem', opacity: 0.7 }}>
-            <Terminal size={14} /> <span>SYSTEM_LOGS // REALTIME</span>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-            {!isCameraActive ? (
-              <div style={{ opacity: 0.5 }}>WAITING_FOR_CAMERA_INIT...</div>
-            ) : !handState.isPresent ? (
-              <div style={{ opacity: 0.5 }}>NO_GESTURE_DATA... HAND NOT DETECTED.</div>
-            ) : (
-              logs.map((log, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
-                  {log}
-                </motion.div>
-              ))
+            {/* Debug: gesture name — sadece DEBUG_GESTURE=true iken görünür */}
+            {DEBUG_GESTURE && handState.isPresent && (
+              <span style={{ marginLeft: '0.5rem', color: '#00f2fe', opacity: 0.7 }}>
+                [{handState.currentGesture}]
+              </span>
             )}
-          </div>
-        </div>
-      </div>
-
-      {/* Visible Camera Feed for User Feedback */}
-      <div style={{
-        position: 'absolute', bottom: '2rem', right: '2rem', width: '240px', height: '180px', borderRadius: '8px', overflow: 'hidden',
-        border: `1px solid ${ts.accent}40`, boxShadow: `0 10px 30px rgba(0,0,0,0.5), 0 0 15px ${ts.accent}20`, zIndex: 10,
-        backgroundColor: 'rgba(5, 10, 20, 0.7)', display: 'flex', flexDirection: 'column', backdropFilter: 'blur(5px)'
-      }}>
-        <div style={{ height: '24px', background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem', color: ts.accent, letterSpacing: '1px' }}>
-          CAM_FEED // AI_VISION
-        </div>
-        <div style={{ position: 'relative', width: '100%', flex: 1 }}>
-          <video ref={videoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)', display: isCameraActive ? 'block' : 'none' }} />
-          {!isCameraActive && <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.3)', fontFamily: 'monospace', fontSize: '0.7rem' }}>OFFLINE</div>}
-          <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />
-        </div>
-      </div>
-
-      {/* CV Modal triggered by THUMBS_UP */}
-      <AnimatePresence>
-        {showCV && (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8, y: 50 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.8, y: 50 }}
-            style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', zIndex: 50, background: 'rgba(10, 15, 30, 0.9)', backdropFilter: 'blur(15px)', border: `1px solid ${ts.accent}`, borderRadius: '16px', padding: '2rem', textAlign: 'center', boxShadow: `0 20px 50px rgba(0,0,0,0.5), 0 0 20px ${ts.accent}50` }}
-          >
-            <h2 style={{ color: '#fff', margin: '0 0 1rem 0', fontFamily: 'Outfit, sans-serif' }}>👍 THUMBS UP DETECTED!</h2>
-            <p style={{ color: ts.accent, marginBottom: '2rem' }}>You unlocked my CV.</p>
-            <a href="/İbrahim TÜRKEL CV tr.pdf" download="Ibrahim_Turkel_CV.pdf" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: ts.accent, color: '#000', padding: '0.8rem 1.5rem', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>
-              <Download size={18} /> DOWNLOAD CV
-            </a>
-            <button onClick={() => setShowCV(false)} style={{ display: 'block', margin: '1rem auto 0', background: 'transparent', border: 'none', color: '#8ba2b2', cursor: 'pointer', textDecoration: 'underline' }}>Close</button>
-          </motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
 
-      {/* Architecture Panel Modal */}
-      <AnimatePresence>
-        {isArchOpen && (
-          <motion.div 
-            initial={{ opacity: 0, backdropFilter: 'blur(0px)' }} animate={{ opacity: 1, backdropFilter: 'blur(8px)' }} exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            style={{ position: 'absolute', inset: 0, zIndex: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.6)' }}
-            onClick={() => setIsArchOpen(false)}
-          >
-            <motion.div 
-              initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 50, opacity: 0 }}
-              style={{ background: 'rgba(15, 20, 35, 0.85)', border: `1px solid ${ts.accent}`, borderRadius: '16px', padding: '2rem', maxWidth: '600px', width: '90%' }}
-              onClick={e => e.stopPropagation()}
-            >
-              <h2 style={{ color: '#fff', marginTop: 0, fontFamily: 'Outfit, sans-serif', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Cpu color={ts.accent} /> SYSTEM ARCHITECTURE</h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
-                <div style={{ background: 'rgba(0,0,0,0.4)', padding: '1rem', borderRadius: '8px', borderLeft: `3px solid ${ts.accent}` }}>
-                  <strong style={{ color: ts.accent }}>1. WebRTC & Canvas (Client)</strong><br/><span style={{ color: '#8ba2b2', fontSize: '0.85rem' }}>Captures raw video feed from the user's webcam.</span>
-                </div>
-                <div style={{ textAlign: 'center', color: ts.accent }}>▼</div>
-                <div style={{ background: 'rgba(0,0,0,0.4)', padding: '1rem', borderRadius: '8px', borderLeft: `3px solid ${ts.accent}` }}>
-                  <strong style={{ color: ts.accent }}>2. Google MediaPipe Tasks Vision</strong><br/><span style={{ color: '#8ba2b2', fontSize: '0.85rem' }}>Processes video frames via WebAssembly (WASM) to extract 21 3D hand landmarks in real-time.</span>
-                </div>
-                <div style={{ textAlign: 'center', color: ts.accent }}>▼</div>
-                <div style={{ background: 'rgba(0,0,0,0.4)', padding: '1rem', borderRadius: '8px', borderLeft: `3px solid ${ts.accent}` }}>
-                  <strong style={{ color: ts.accent }}>3. React State Engine & Hooks</strong><br/><span style={{ color: '#8ba2b2', fontSize: '0.85rem' }}>Calculates gestures (Peace, Thumbs Up, Pinch) using vector math and updates UI state 60 times a second.</span>
-                </div>
-                <div style={{ textAlign: 'center', color: ts.accent }}>▼</div>
-                <div style={{ background: 'rgba(0,0,0,0.4)', padding: '1rem', borderRadius: '8px', borderLeft: `3px solid ${ts.accent}` }}>
-                  <strong style={{ color: ts.accent }}>4. Three.js / React Three Fiber</strong><br/><span style={{ color: '#8ba2b2', fontSize: '0.85rem' }}>Translates hand coordinates to 3D space, interacting with shaders and the WebGL Hologram Globe.</span>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Main UI Control Panel */}
-      <div style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', width: '100%', display: 'flex', justifyContent: 'center', zIndex: 10 }}>
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
-          style={{ 
-            background: 'linear-gradient(180deg, rgba(30, 20, 50, 0.4) 0%, rgba(10, 25, 40, 0.8) 100%)',
-            backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255, 255, 255, 0.05)', borderTop: `1px solid ${ts.accent}80`,
-            borderRadius: '16px', padding: '1.5rem 3rem', textAlign: 'center', minWidth: '450px',
-            boxShadow: `0 20px 40px rgba(0, 0, 0, 0.6), inset 0 2px 15px ${ts.accent}20`
+      {/* ── Camera feed (bottom-right) ────────────────────────────────────── */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '2rem',
+          right: '2rem',
+          width: '220px',
+          height: '165px',
+          borderRadius: '10px',
+          overflow: 'hidden',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
+          zIndex: 20,
+          backgroundColor: 'rgba(5,10,20,0.8)',
+          display: 'flex',
+          flexDirection: 'column',
+          backdropFilter: 'blur(8px)',
+        }}
+      >
+        <div
+          style={{
+            height: '22px',
+            background: 'rgba(0,0,0,0.4)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '0.6rem',
+            color: isCameraActive ? '#10b981' : '#8ba2b2',
+            fontFamily: 'JetBrains Mono, monospace',
+            letterSpacing: '1.5px',
+            gap: '0.4rem',
           }}
         >
-          <h1 style={{ fontSize: '1.4rem', margin: '0 0 0.5rem 0', fontFamily: 'Outfit, sans-serif', fontWeight: '700', letterSpacing: '1px', color: '#ffffff', textShadow: '0 2px 10px rgba(255,255,255,0.3)' }}>
+          <span
+            style={{
+              width: '5px',
+              height: '5px',
+              borderRadius: '50%',
+              background: isCameraActive ? '#10b981' : '#8ba2b2',
+              display: 'inline-block',
+            }}
+          />
+          {isCameraActive ? 'CAM FEED — LIVE' : 'CAM OFFLINE'}
+        </div>
+        <div style={{ position: 'relative', flex: 1 }}>
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            muted
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transform: 'scaleX(-1)',
+              display: isCameraActive ? 'block' : 'none',
+            }}
+          />
+          {!isCameraActive && (
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'rgba(255,255,255,0.2)',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.65rem',
+              }}
+            >
+              OFFLINE
+            </div>
+          )}
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: 'absolute',
+              top: 0, left: 0,
+              width: '100%', height: '100%',
+              pointerEvents: 'none',
+            }}
+          />
+        </div>
+      </div>
+
+      {/* ── Debug log panel — sadece DEBUG_GESTURE=true iken görünür ─────── */}
+      {DEBUG_GESTURE && isCameraActive && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '2rem',
+            left: '2rem',
+            zIndex: 20,
+            width: '280px',
+            background: 'rgba(5,10,20,0.7)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(0,242,254,0.2)',
+            borderRadius: '8px',
+            padding: '0.75rem 1rem',
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '0.65rem',
+            color: '#00f2fe',
+          }}
+        >
+          <div style={{ opacity: 0.5, marginBottom: '0.5rem' }}>// DEBUG LOG</div>
+          <div>gesture: {handState.currentGesture}</div>
+          <div>hand: {handState.isPresent ? 'YES' : 'NO'}</div>
+          <div>
+            pos: x={handState.handCenter.x.toFixed(2)}{' '}
+            y={handState.handCenter.y.toFixed(2)}
+          </div>
+          <div>pinch: {handState.pinchDistance.toFixed(3)}</div>
+        </div>
+      )}
+
+      {/* ── Main control panel (bottom-center) ────────────────────────────── */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '2rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 20,
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(30,20,50,0.35) 0%, rgba(10,25,40,0.75) 100%)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255,255,255,0.05)',
+            borderTop: '1px solid rgba(0,242,254,0.3)',
+            borderRadius: '16px',
+            padding: '1.25rem 2.5rem',
+            textAlign: 'center',
+            minWidth: '380px',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.6), inset 0 2px 10px rgba(0,242,254,0.05)',
+          }}
+        >
+          <h1
+            style={{
+              fontSize: '1.2rem',
+              margin: '0 0 0.3rem',
+              fontFamily: 'Outfit, sans-serif',
+              fontWeight: 700,
+              letterSpacing: '1.5px',
+              color: '#ffffff',
+            }}
+          >
             VIRTUAL REALITY SHOWCASE
           </h1>
-          <p style={{ color: '#8ba2b2', fontSize: '0.8rem', margin: '0', fontFamily: 'Outfit, sans-serif' }}>
-            *Experience the Human-Computer Interaction
+          <p
+            style={{
+              color: '#8ba2b2',
+              fontSize: '0.75rem',
+              margin: 0,
+              fontFamily: 'Outfit, sans-serif',
+            }}
+          >
+            Hand tracking · Real-time 3D · MediaPipe
           </p>
 
-          <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            {!isCameraActive && (
-              <button onClick={startCamera} disabled={!isReady} style={{ 
-                background: `${ts.accent}20`, border: `1px solid ${ts.accent}80`, color: ts.accent,
-                fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', padding: '0.5rem 1.5rem', borderRadius: '4px', cursor: 'pointer', transition: 'all 0.3s'
-              }}>
-                {isReady ? 'ACTIVATE SYSTEM' : 'INITIALIZING...'}
+          <div
+            style={{
+              marginTop: '1.25rem',
+              display: 'flex',
+              gap: '0.75rem',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            {/* Camera toggle */}
+            {!isCameraActive ? (
+              <button
+                onClick={startCamera}
+                disabled={!isReady}
+                style={{
+                  background: isReady ? 'rgba(0,242,254,0.1)' : 'rgba(255,255,255,0.03)',
+                  border: isReady
+                    ? '1px solid rgba(0,242,254,0.35)'
+                    : '1px solid rgba(255,255,255,0.08)',
+                  color: isReady ? '#00f2fe' : '#8ba2b2',
+                  fontFamily: 'Outfit, sans-serif',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  padding: '0.5rem 1.25rem',
+                  borderRadius: '6px',
+                  cursor: isReady ? 'pointer' : 'default',
+                  letterSpacing: '0.5px',
+                  transition: 'all 0.25s',
+                }}
+              >
+                {isReady ? 'KAMERAY I AÇ' : 'YÜKLENİYOR...'}
+              </button>
+            ) : (
+              <button
+                onClick={stopCamera}
+                style={{
+                  background: 'rgba(239,68,68,0.08)',
+                  border: '1px solid rgba(239,68,68,0.3)',
+                  color: '#ef4444',
+                  fontFamily: 'Outfit, sans-serif',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  padding: '0.5rem 1.25rem',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  letterSpacing: '0.5px',
+                  transition: 'all 0.25s',
+                }}
+              >
+                KAMERAYI KAPAT
               </button>
             )}
-            <button onClick={() => setIsArchOpen(true)} style={{ 
-              background: 'transparent', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', display: 'flex', alignItems: 'center', gap: '0.4rem',
-              fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', padding: '0.5rem 1.5rem', borderRadius: '4px', cursor: 'pointer', transition: 'all 0.3s'
-            }}>
-              <Cpu size={14} /> MİMARİYİ İNCELE
+
+            {/* Architecture modal — sadece tıklamayla açılır */}
+            <button
+              onClick={() => setIsArchOpen(true)}
+              style={{
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.15)',
+                color: '#fff',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                fontFamily: 'Outfit, sans-serif',
+                fontSize: '0.75rem',
+                padding: '0.5rem 1.25rem',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                letterSpacing: '0.5px',
+                transition: 'all 0.25s',
+              }}
+            >
+              <Cpu size={13} />
+              MİMARİ
             </button>
+
+            {/* CV download — sadece bu butonla çalışır */}
+            <a
+              href="/Ibrahim_Turkel_tr_CV.pdf"
+              download
+              style={{
+                background: 'rgba(16,185,129,0.08)',
+                border: '1px solid rgba(16,185,129,0.3)',
+                color: '#10b981',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                fontFamily: 'Outfit, sans-serif',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                padding: '0.5rem 1.25rem',
+                borderRadius: '6px',
+                letterSpacing: '0.5px',
+                textDecoration: 'none',
+                transition: 'all 0.25s',
+              }}
+            >
+              <Download size={13} />
+              CV İNDİR
+            </a>
           </div>
-        </motion.div>
+        </Motion.div>
       </div>
+
+      {/* ── Architecture modal — sadece kullanıcı tıklamasıyla ────────────── */}
+      <AnimatePresence>
+        {isArchOpen && (
+          <Motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              zIndex: 50,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'rgba(0,0,0,0.65)',
+              backdropFilter: 'blur(6px)',
+            }}
+            onClick={() => setIsArchOpen(false)}
+          >
+            <Motion.div
+              initial={{ y: 40, opacity: 0, scale: 0.96 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 40, opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                background: 'rgba(10,15,28,0.95)',
+                border: '1px solid rgba(0,242,254,0.2)',
+                borderRadius: '16px',
+                padding: '2.5rem',
+                maxWidth: '560px',
+                width: '90%',
+                boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.75rem',
+                  marginBottom: '2rem',
+                }}
+              >
+                <div
+                  style={{
+                    padding: '0.6rem',
+                    background: 'rgba(0,242,254,0.1)',
+                    borderRadius: '10px',
+                    color: '#00f2fe',
+                  }}
+                >
+                  <Cpu size={20} />
+                </div>
+                <div>
+                  <h2
+                    style={{
+                      margin: 0,
+                      fontFamily: 'Outfit, sans-serif',
+                      fontSize: '1.2rem',
+                      fontWeight: 700,
+                      color: '#fff',
+                    }}
+                  >
+                    Sistem Mimarisi
+                  </h2>
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: '0.8rem',
+                      color: '#8ba2b2',
+                    }}
+                  >
+                    Hand Tracking Pipeline
+                  </p>
+                </div>
+              </div>
+
+              {[
+                {
+                  label: '1. WebRTC & Canvas',
+                  desc: 'Kullanıcının kamerasından ham video verisi alınır.',
+                },
+                {
+                  label: '2. Google MediaPipe Tasks Vision',
+                  desc: 'Video kareler WebAssembly (WASM) ile işlenerek 21 adet 3D el landmarkı çıkarılır.',
+                },
+                {
+                  label: '3. React State Engine',
+                  desc: 'Gesture\'lar (pinch, open hand) vektör matematiğiyle hesaplanır, saniyede 60 kez güncellenir.',
+                },
+                {
+                  label: '4. Three.js / React Three Fiber',
+                  desc: 'El koordinatları 3D uzaya çevrilerek WebGL Hologram Globe ile etkileşime girer.',
+                },
+              ].map((step, i) => (
+                <div key={i}>
+                  <div
+                    style={{
+                      background: 'rgba(0,0,0,0.35)',
+                      padding: '1rem 1.25rem',
+                      borderRadius: '8px',
+                      borderLeft: '3px solid rgba(0,242,254,0.35)',
+                      marginBottom: i < 3 ? '0.75rem' : 0,
+                    }}
+                  >
+                    <strong style={{ color: '#00f2fe', fontSize: '0.88rem' }}>
+                      {step.label}
+                    </strong>
+                    <p
+                      style={{
+                        margin: '0.3rem 0 0',
+                        color: '#8ba2b2',
+                        fontSize: '0.82rem',
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {step.desc}
+                    </p>
+                  </div>
+                  {i < 3 && (
+                    <div
+                      style={{
+                        textAlign: 'center',
+                        color: 'rgba(0,242,254,0.35)',
+                        fontSize: '0.8rem',
+                        lineHeight: '1.5rem',
+                      }}
+                    >
+                      ▼
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              <button
+                onClick={() => setIsArchOpen(false)}
+                style={{
+                  marginTop: '1.75rem',
+                  width: '100%',
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  color: '#8ba2b2',
+                  padding: '0.6rem',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontFamily: 'Outfit, sans-serif',
+                  fontSize: '0.85rem',
+                  transition: 'all 0.2s',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+                  e.currentTarget.style.color = '#fff';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                  e.currentTarget.style.color = '#8ba2b2';
+                }}
+              >
+                Kapat
+              </button>
+            </Motion.div>
+          </Motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

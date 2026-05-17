@@ -1,0 +1,66 @@
+<svg width="360" height="96" viewBox="0 0 360 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">İbrahim Türkel IT AI Logo</title>
+  <desc id="desc">A dark AI-themed logo with circuit lines, a brain outline, and IT initials.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="360" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061522"/>
+      <stop offset="0.55" stop-color="#082336"/>
+      <stop offset="1" stop-color="#050B16"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="95" y1="13" x2="221" y2="86" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7E7A7"/>
+      <stop offset="0.55" stop-color="#CDAA52"/>
+      <stop offset="1" stop-color="#7C5A22"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="114" y1="19" x2="233" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#28F4FF"/>
+      <stop offset="1" stop-color="#0A7188"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="168" y1="15" x2="269" y2="84" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FAFAFA"/>
+      <stop offset="0.45" stop-color="#C7D2DA"/>
+      <stop offset="1" stop-color="#707D88"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-30%" width="140%" height="160%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2.4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.05 0 0 0 0 0.94 0 0 0 0 1 0 0 0 0.65 0"/>
+      <feBlend in="SourceGraphic"/>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <rect width="360" height="96" rx="18" fill="url(#bg)"/>
+  <path d="M25 38H72L89 52H114" stroke="#1DD9E8" stroke-opacity="0.75" stroke-width="2"/>
+  <path d="M18 58H58L74 46H108" stroke="#78EAF1" stroke-opacity="0.58" stroke-width="1.6"/>
+  <path d="M246 42H288L302 29H338" stroke="#72ECF3" stroke-opacity="0.6" stroke-width="1.8"/>
+  <path d="M239 57H292L309 68H343" stroke="#1DD9E8" stroke-opacity="0.72" stroke-width="2"/>
+  <path d="M38 27H60M49 27V17M304 49H326M315 49V39" stroke="#66DDE8" stroke-opacity="0.55" stroke-width="1.5"/>
+  <circle cx="25" cy="38" r="3" fill="#27F4FF"/>
+  <circle cx="18" cy="58" r="2.8" fill="#98FAFF"/>
+  <circle cx="338" cy="29" r="3" fill="#27F4FF"/>
+  <circle cx="343" cy="68" r="2.8" fill="#98FAFF"/>
+
+  <g filter="url(#shadow)">
+    <path d="M142 18C130 18 121 25 119 36C108 37 100 45 100 56C100 68 110 77 122 77H131C137 86 148 89 158 83C164 91 177 90 183 81C194 83 205 76 207 64C217 61 223 52 220 42C218 31 209 24 198 24C193 15 181 12 172 18C164 11 151 11 142 18Z" fill="#071521" stroke="url(#silver)" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M142 18C130 18 121 25 119 36C108 37 100 45 100 56C100 68 110 77 122 77H131C137 86 148 89 158 83C164 91 177 90 183 81C194 83 205 76 207 64C217 61 223 52 220 42C218 31 209 24 198 24C193 15 181 12 172 18C164 11 151 11 142 18Z" stroke="url(#gold)" stroke-width="1.35" stroke-linejoin="round" opacity="0.95"/>
+
+    <path d="M118 57H140L153 44H173M123 42H145L156 30H177M137 73V58H160L172 70" stroke="url(#gold)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M183 33H205M193 33V22M187 48H214M202 48V63M181 72H204L213 81" stroke="url(#silver)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="118" cy="57" r="3.2" fill="#CDAA52"/>
+    <circle cx="123" cy="42" r="3.2" fill="#CDAA52"/>
+    <circle cx="172" cy="70" r="3" fill="#EAD58D"/>
+    <circle cx="205" cy="33" r="3" fill="#DCE6EA"/>
+    <circle cx="214" cy="48" r="3" fill="#DCE6EA"/>
+  </g>
+
+  <g filter="url(#glow)">
+    <path d="M136 31H161V38H153V69H136V31Z" fill="#082033" stroke="url(#cyan)" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M166 31H224V44H204V70H186V44H166V31Z" fill="#081B2B" stroke="url(#silver)" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M136 31H161V38H153V69H136V31Z" stroke="#033745" stroke-width="1.1" stroke-linejoin="round"/>
+    <path d="M166 31H224V44H204V70H186V44H166V31Z" stroke="#06111D" stroke-width="1.1" stroke-linejoin="round"/>
+  </g>
+
+  <path d="M73 78H109M251 22H285M268 22V14M91 17H113" stroke="#2FE7F2" stroke-opacity="0.25" stroke-width="1.5"/>
+</svg>

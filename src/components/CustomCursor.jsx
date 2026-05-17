@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -29,7 +29,7 @@ export default function CustomCursor() {
 
   return (
     <>
-      <motion.div
+      <Motion.div
         className="cursor-dot"
         animate={{
           x: mousePosition.x - 4,
@@ -38,7 +38,7 @@ export default function CustomCursor() {
         }}
         transition={{ type: 'spring', stiffness: 1000, damping: 28, mass: 0.1 }}
       />
-      <motion.div
+      <Motion.div
         className="cursor-glow"
         animate={{
           x: mousePosition.x - 150,

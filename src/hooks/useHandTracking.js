@@ -1,238 +1,222 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { HandLandmarker, FilesetResolver } from '@mediapipe/tasks-vision';
 
+// ─── Feature flag ─────────────────────────────────────────────────────────────
+const DEBUG_GESTURE = false;
+
 export default function useHandTracking() {
-  const [isReady, setIsReady] = useState(false);
+  const [isReady, setIsReady]               = useState(false);
   const [isCameraActive, setIsCameraActive] = useState(false);
-  const [handState, setHandState] = useState({
-    isPresent: false,
-    isOpen: false,
-    isPinching: false,
-    pinchDistance: 0,
-    handCenter: { x: 0.5, y: 0.5 },
-    currentGesture: 'NONE', // 'NONE', 'PEACE', 'THUMBS_UP', 'PINCH', 'OPEN'
-    rawLandmarks: null
+  const [handState, setHandState]           = useState({
+    isPresent:      false,
+    isOpen:         false,
+    isPinching:     false,
+    pinchDistance:  0,
+    handCenter:     { x: 0, y: 0 },
+    currentGesture: 'NONE',
+    rawLandmarks:   null,
   });
 
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
-  const streamRef = useRef(null);
-  const landmarkerRef = useRef(null);
-  const animationRef = useRef(null);
-  const lastVideoTimeRef = useRef(-1);
+  const videoRef          = useRef(null);
+  const canvasRef         = useRef(null);
+  const streamRef         = useRef(null);
+  const landmarkerRef     = useRef(null);
+  const animationRef      = useRef(null);
+  const processVideoRef   = useRef(null);
+  const lastVideoTimeRef  = useRef(-1);
 
-  // Initialize MediaPipe HandLandmarker
+  // ── Initialize MediaPipe HandLandmarker ──────────────────────────────────
   useEffect(() => {
-    let isMounted = true;
-    const initializeLandmarker = async () => {
+    let mounted = true;
+    (async () => {
       try {
         const vision = await FilesetResolver.forVisionTasks(
           'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm'
         );
         const landmarker = await HandLandmarker.createFromOptions(vision, {
           baseOptions: {
-            modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',
-            delegate: 'GPU'
+            modelAssetPath:
+              'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',
+            delegate: 'GPU',
           },
           runningMode: 'VIDEO',
-          numHands: 1
+          numHands: 1,
         });
-        if (isMounted) {
+        if (mounted) {
           landmarkerRef.current = landmarker;
           setIsReady(true);
         }
-      } catch (error) {
-        console.error('Failed to initialize HandLandmarker:', error);
+      } catch (err) {
+        if (DEBUG_GESTURE) console.error('[HandTracking] Init failed:', err);
       }
-    };
-    initializeLandmarker();
-    return () => {
-      isMounted = false;
-    };
+    })();
+    return () => { mounted = false; };
   }, []);
 
-  const drawHandSkeleton = (ctx, landmarks, width, height) => {
-    ctx.clearRect(0, 0, width, height);
+  // ── Minimal skeleton draw ────────────────────────────────────────────────
+  const drawSkeleton = (ctx, landmarks, w, h) => {
+    ctx.clearRect(0, 0, w, h);
     if (!landmarks) return;
 
-    // MediaPipe Hand Connections
     const connections = [
-      [0, 1], [1, 2], [2, 3], [3, 4], // thumb
-      [0, 5], [5, 6], [6, 7], [7, 8], // index
-      [9, 10], [10, 11], [11, 12], // middle
-      [13, 14], [14, 15], [15, 16], // ring
-      [0, 17], [17, 18], [18, 19], [19, 20], // pinky
-      [5, 9], [9, 13], [13, 17] // palm
+      [0,1],[1,2],[2,3],[3,4],
+      [0,5],[5,6],[6,7],[7,8],
+      [9,10],[10,11],[11,12],
+      [13,14],[14,15],[15,16],
+      [0,17],[17,18],[18,19],[19,20],
+      [5,9],[9,13],[13,17],
     ];
 
-    ctx.strokeStyle = '#00f2fe'; // Neon Cyan
-    ctx.lineWidth = 2.5;
-
-    // Draw lines
+    // Sade, yarı saydam çizgi
+    ctx.strokeStyle = 'rgba(0,242,254,0.55)';
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    for (const [startIdx, endIdx] of connections) {
-      const start = landmarks[startIdx];
-      const end = landmarks[endIdx];
-      // Flip X to match mirrored video
-      ctx.moveTo((1 - start.x) * width, start.y * height);
-      ctx.lineTo((1 - end.x) * width, end.y * height);
+    for (const [a, b] of connections) {
+      ctx.moveTo((1 - landmarks[a].x) * w, landmarks[a].y * h);
+      ctx.lineTo((1 - landmarks[b].x) * w, landmarks[b].y * h);
     }
     ctx.stroke();
 
-    // Draw joints
-    ctx.fillStyle = '#10b981'; // Neon Green
+    // Küçük, sade noktalar
+    ctx.fillStyle = 'rgba(16,185,129,0.75)';
     for (const lm of landmarks) {
       ctx.beginPath();
-      ctx.arc((1 - lm.x) * width, lm.y * height, 3.5, 0, 2 * Math.PI);
+      ctx.arc((1 - lm.x) * w, lm.y * h, 2.5, 0, Math.PI * 2);
       ctx.fill();
     }
   };
 
-  const detectGesture = (landmarks, isPinching, isOpen) => {
-    // Y ekseninde tip (uç) noktasının pip (boğum) noktasından yukarıda olup olmadığını kontrol eder
-    const isUp = (tipIdx, pipIdx) => landmarks[tipIdx].y < landmarks[pipIdx].y;
-    const isDown = (tipIdx, pipIdx) => landmarks[tipIdx].y > landmarks[pipIdx].y;
+  // ── Gesture detection — sadece veri üretir, UI aksiyonu tetiklemez ────────
+  const detectGesture = (landmarks) => {
+    const up   = (tip, pip) => landmarks[tip].y < landmarks[pip].y;
+    const down = (tip, pip) => landmarks[tip].y > landmarks[pip].y;
 
-    // Barış İşareti (✌️): İşaret ve Orta parmak havada, diğerleri kapalı
-    const peace = isUp(8, 6) && isUp(12, 10) && isDown(16, 14) && isDown(20, 18);
-    
-    // Başparmak Havaya (👍): Başparmak havada, diğer hepsi kapalı
-    // Başparmağın ucu, el bileğine göre daha yukarda olmalı ve diğer parmaklar kapalı olmalı
-    const thumbsUp = landmarks[4].y < landmarks[3].y && 
-                     isDown(8, 6) && isDown(12, 10) && isDown(16, 14) && isDown(20, 18);
+    if (up(8,6) && up(12,10) && down(16,14) && down(20,18)) return 'PEACE';
+    if (landmarks[4].y < landmarks[3].y && down(8,6) && down(12,10) && down(16,14) && down(20,18))
+      return 'THUMBS_UP';
 
-    if (peace) return 'PEACE';
-    if (thumbsUp) return 'THUMBS_UP';
-    if (isPinching) return 'PINCH_ZOOM';
-    if (isOpen) return 'OPEN_HAND';
+    const pinchDx = landmarks[4].x - landmarks[8].x;
+    const pinchDy = landmarks[4].y - landmarks[8].y;
+    if (Math.sqrt(pinchDx**2 + pinchDy**2) < 0.05) return 'PINCH';
+
+    const spreadDx = landmarks[12].x - landmarks[0].x;
+    const spreadDy = landmarks[12].y - landmarks[0].y;
+    if (Math.sqrt(spreadDx**2 + spreadDy**2) > 0.3) return 'OPEN_HAND';
+
     return 'TRACKING';
   };
 
+  // ── Main video loop ──────────────────────────────────────────────────────
   const processVideo = useCallback(() => {
     if (!videoRef.current || !landmarkerRef.current || !isCameraActive) return;
 
-    const video = videoRef.current;
+    const video  = videoRef.current;
     const canvas = canvasRef.current;
-    
-    // Ensure canvas dimensions match video
-    if (canvas && video.videoWidth) {
-      if (canvas.width !== video.videoWidth) {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-      }
+
+    if (canvas && video.videoWidth && canvas.width !== video.videoWidth) {
+      canvas.width  = video.videoWidth;
+      canvas.height = video.videoHeight;
     }
 
     if (video.currentTime !== lastVideoTimeRef.current && video.readyState >= 2) {
       lastVideoTimeRef.current = video.currentTime;
-      
+
       const results = landmarkerRef.current.detectForVideo(video, performance.now());
-      
-      if (results.landmarks && results.landmarks.length > 0) {
-        const landmarks = results.landmarks[0]; // First hand
-        
-        // Draw skeleton
+
+      if (results.landmarks?.length > 0) {
+        const landmarks = results.landmarks[0];
+
         if (canvas) {
-          const ctx = canvas.getContext('2d');
-          drawHandSkeleton(ctx, landmarks, canvas.width, canvas.height);
+          drawSkeleton(canvas.getContext('2d'), landmarks, canvas.width, canvas.height);
         }
 
-        const wrist = landmarks[0];
+        const wrist    = landmarks[0];
         const thumbTip = landmarks[4];
-        const indexTip = landmarks[8];
-        const middleTip = landmarks[12];
+        const idxTip   = landmarks[8];
+        const midTip   = landmarks[12];
 
-        // 1. Pinch Detection
-        const dx = thumbTip.x - indexTip.x;
-        const dy = thumbTip.y - indexTip.y;
-        const pinchDist = Math.sqrt(dx * dx + dy * dy);
-        const isPinching = pinchDist < 0.05;
+        const pdx = thumbTip.x - idxTip.x;
+        const pdy = thumbTip.y - idxTip.y;
+        const pinchDistance = Math.sqrt(pdx**2 + pdy**2);
 
-        // 2. Open Hand Detection
-        const openDx = middleTip.x - wrist.x;
-        const openDy = middleTip.y - wrist.y;
-        const openDist = Math.sqrt(openDx * openDx + openDy * openDy);
-        const isOpen = openDist > 0.3;
+        const odx = midTip.x - wrist.x;
+        const ody = midTip.y - wrist.y;
+        const isOpen = Math.sqrt(odx**2 + ody**2) > 0.3;
 
-        // 3. Hand Center Position
-        const handCenter = {
-          x: (wrist.x - 0.5) * -2, 
-          y: (wrist.y - 0.5) * -2
-        };
+        const gesture = detectGesture(landmarks);
 
-        // 4. Gesture Detection
-        const currentGesture = detectGesture(landmarks, isPinching, isOpen);
+        if (DEBUG_GESTURE) {
+          console.debug(`[HandTracking] gesture=${gesture} pinch=${pinchDistance.toFixed(3)}`);
+        }
 
+        // ── Sadece state güncelle — hiçbir UI aksiyonu tetiklenmiyor ────────
         setHandState({
-          isPresent: true,
+          isPresent:      true,
           isOpen,
-          isPinching,
-          pinchDistance: pinchDist,
-          handCenter,
-          currentGesture,
-          rawLandmarks: landmarks
+          isPinching:     pinchDistance < 0.05,
+          pinchDistance,
+          handCenter: {
+            x: (wrist.x - 0.5) * -2,
+            y: (wrist.y - 0.5) * -2,
+          },
+          currentGesture: gesture,
+          rawLandmarks:   landmarks,
         });
       } else {
         if (canvas) {
-          const ctx = canvas.getContext('2d');
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
         }
-        setHandState(prev => prev.isPresent ? { ...prev, isPresent: false, currentGesture: 'NONE' } : prev);
+        setHandState(prev =>
+          prev.isPresent
+            ? { ...prev, isPresent: false, currentGesture: 'NONE' }
+            : prev
+        );
       }
     }
-    
-    animationRef.current = requestAnimationFrame(processVideo);
+
+    if (processVideoRef.current) {
+      animationRef.current = requestAnimationFrame(processVideoRef.current);
+    }
   }, [isCameraActive]);
+
+  useEffect(() => {
+    processVideoRef.current = processVideo;
+  }, [processVideo]);
 
   useEffect(() => {
     if (isCameraActive) {
       animationRef.current = requestAnimationFrame(processVideo);
     } else {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
-      // Clear canvas on stop
       if (canvasRef.current) {
-        const ctx = canvasRef.current.getContext('2d');
-        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        canvasRef.current.getContext('2d')
+          .clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       }
     }
-    return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    };
+    return () => { if (animationRef.current) cancelAnimationFrame(animationRef.current); };
   }, [isCameraActive, processVideo]);
 
+  // ── Camera controls ───────────────────────────────────────────────────────
   const startCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { width: 640, height: 480 }
-      });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
         streamRef.current = stream;
         setIsCameraActive(true);
       }
     } catch (err) {
-      console.error('Error accessing webcam:', err);
+      if (DEBUG_GESTURE) console.error('[HandTracking] Camera error:', err);
     }
   };
 
   const stopCamera = () => {
     setIsCameraActive(false);
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
-      streamRef.current = null;
-    }
-    if (videoRef.current) {
-      videoRef.current.srcObject = null;
-    }
+    streamRef.current?.getTracks().forEach(t => t.stop());
+    streamRef.current = null;
+    if (videoRef.current) videoRef.current.srcObject = null;
     setHandState(prev => ({ ...prev, isPresent: false, currentGesture: 'NONE' }));
   };
 
-  return {
-    isReady,
-    isCameraActive,
-    videoRef,
-    canvasRef,
-    handState,
-    startCamera,
-    stopCamera
-  };
+  return { isReady, isCameraActive, videoRef, canvasRef, handState, startCamera, stopCamera };
 }
