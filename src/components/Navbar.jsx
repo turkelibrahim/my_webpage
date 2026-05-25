@@ -24,6 +24,7 @@ export default function Navbar() {
 
   const navLinks = useMemo(() => [
     { label: t('nav.about'), href: '#about' },
+    { label: t('nav.ailab'), href: '#ailab', highlight: true },
     { label: t('nav.skills'), href: '#skills' },
     { label: t('nav.projects'), href: '#projects' },
     { label: t('nav.certifications'), href: '#certifications' },
@@ -93,14 +94,15 @@ export default function Navbar() {
                   padding: '0.45rem 0.9rem',
                   borderRadius: '8px',
                   fontSize: '0.9rem',
-                  fontWeight: 500,
-                  color: active === id ? 'var(--accent-1)' : 'var(--text-secondary)',
-                  background: active === id ? 'rgba(0, 242, 254, 0.08)' : 'transparent',
+                  fontWeight: link.highlight ? 700 : 500,
+                  color: active === id ? 'var(--accent-1)' : link.highlight ? 'var(--accent-2)' : 'var(--text-secondary)',
+                  background: active === id ? 'rgba(0, 242, 254, 0.08)' : link.highlight ? 'rgba(16,185,129,0.07)' : 'transparent',
+                  border: link.highlight ? '1px solid rgba(16,185,129,0.2)' : '1px solid transparent',
                   transition: 'color 0.2s, background 0.2s',
                   textDecoration: 'none',
                 }}
-                onMouseOver={e => { if (active !== id) e.currentTarget.style.color = '#fff'; }}
-                onMouseOut={e => { if (active !== id) e.currentTarget.style.color = 'var(--text-secondary)'; }}
+                onMouseOver={e => { if (active !== id) e.currentTarget.style.color = link.highlight ? 'var(--accent-2)' : '#fff'; }}
+                onMouseOut={e => { if (active !== id) e.currentTarget.style.color = link.highlight ? 'var(--accent-2)' : 'var(--text-secondary)'; }}
               >
                 {link.label}
               </a>

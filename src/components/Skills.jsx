@@ -41,7 +41,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="section container">
-      <SectionLabel number={2} label={t('skills.label')} />
+      <SectionLabel number={3} label={t('skills.label')} />
       <Motion.h2
         className="section-title"
         initial={{ opacity: 0, y: 30 }}

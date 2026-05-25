@@ -21,6 +21,9 @@ export function LanguageProvider({ children }) {
   useEffect(() => {
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, currentLanguage);
     document.documentElement.lang = currentLanguage;
+    document.documentElement.classList.add('notranslate');
+    document.documentElement.setAttribute('translate', 'no');
+    document.body?.setAttribute('translate', 'no');
   }, [currentLanguage]);
 
   const value = useMemo(() => {

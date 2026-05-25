@@ -8,6 +8,7 @@ export const translations = {
     nav: {
       home: 'Ana Sayfa',
       about: 'Hakkımda',
+      ailab: 'AI Lab',
       skills: 'Yetenekler',
       projects: 'Projeler',
       certifications: 'Sertifikalar',
@@ -99,6 +100,74 @@ export const translations = {
       languages: [
         { lang: 'Türkçe', level: 'Ana Dil', pct: 100 },
         { lang: 'İngilizce', level: 'B2', pct: 75, note: '%100 İngilizce müfredat' },
+      ],
+    },
+    ailab: {
+      label: 'AI Lab',
+      titlePrefix: 'Benim',
+      titleHighlight: 'AI Lab\'ım',
+      subtitle: 'Bulut yok. Veri sızıntısı yok. Her şey kendi donanımımda, tam kontrol altında çalışıyor.',
+      activeLabel: 'AKTİF',
+      terminalTitle: 'ibrahim@local-ai ~',
+      terminalBadge: 'OFFLINE ✓',
+      tools: {
+        ollama: {
+          name: 'Ollama',
+          desc: 'Lokal LLM\'leri API aracılığıyla çalıştırmak için en sevdiğim runtime. Llama 3.2, Mistral, Phi-3 gibi modelleri test ediyorum.',
+          tags: ['LLM Runtime', 'REST API', 'Lokal İnference'],
+        },
+        lmstudio: {
+          name: 'LM Studio',
+          desc: 'GGUF model yükleme ve GUI tabanlı deney ortamı. Farklı quantization seviyelerini karşılaştırmak için kullanıyorum.',
+          tags: ['GGUF', 'GUI', 'Model Test'],
+        },
+        huggingface: {
+          name: 'Hugging Face',
+          desc: 'Transformers kütüphanesi ile model indirme, fine-tuning araştırmaları ve NLP pipeline\'ları oluşturma.',
+          tags: ['Transformers', 'Pipeline', 'Fine-tune'],
+        },
+        python: {
+          name: 'Python',
+          desc: 'AI agent sistemleri, otomasyon scriptleri ve LLM entegrasyonları için temel programlama dilim.',
+          tags: ['Agent', 'Script', 'Otomasyon'],
+        },
+        langchain: {
+          name: 'LangChain',
+          desc: 'Lokal LLM\'leri zincirleyerek karmaşık AI agent akışları ve RAG sistemleri oluşturmak için kullanıyorum.',
+          tags: ['RAG', 'Agent Chain', 'LLM Zinciri'],
+        },
+        chroma: {
+          name: 'ChromaDB',
+          desc: 'Lokal vector veritabanı. Embedding\'leri saklamak ve anlamsal arama yapmak için RAG projelerinde kullanıyorum.',
+          tags: ['Vector DB', 'Embedding', 'RAG'],
+        },
+      },
+      privacy: {
+        title: 'Privacy-First AI',
+        tagline: 'Bulut bağımlılığı olmadan tam kontrol',
+        points: [
+          { title: 'Veri Sızıntısı Yok', desc: 'Tüm işlemler kendi donanımımda gerçekleşiyor. Hiçbir veri dışarı çıkmıyor.' },
+          { title: 'Çevrimdışı Çalışır', desc: 'İnternete bağlantı gerekmez. Model indirildikten sonra tamamen offline çalışır.' },
+          { title: 'Donanım Optimizasyonu', desc: 'GPU ve CPU kaynakları verimli kullanılarak maksimum hız ve performans sağlanıyor.' },
+          { title: 'Tam Özelleştirme', desc: 'Model, prompt ve inference parametreleri tamamen kontrol altında. Kısıtlama yok.' },
+        ],
+      },
+      terminalLines: [
+        { text: '$ ollama list', color: 'var(--accent-1)', instant: false, speed: 45, pauseAfter: 500 },
+        { text: 'NAME                    SIZE', color: '#64748b', instant: true, delay: 200 },
+        { text: 'llama3.2:3b             2.0 GB', color: 'var(--accent-2)', instant: true, delay: 100 },
+        { text: 'mistral:7b              4.1 GB', color: 'var(--accent-2)', instant: true, delay: 100 },
+        { text: 'phi3:3.8b               2.2 GB', color: 'var(--accent-2)', instant: true, delay: 100 },
+        { text: '$ ollama run llama3.2', color: 'var(--accent-1)', instant: false, speed: 45, pauseAfter: 600 },
+        { text: '>>> Model yükleniyor...  ████████ 100%', color: '#f59e0b', instant: true, delay: 400 },
+        { text: '>>> Sistem hazır. Soru yazabilirsiniz.', color: 'var(--accent-2)', instant: true, delay: 300 },
+        { text: '>>> _', color: 'var(--accent-2)', instant: true, delay: 200 },
+      ],
+      hwSpecs: [
+        { label: 'GPU:', value: 'Local GPU' },
+        { label: 'RAM:', value: '16 GB' },
+        { label: 'MODE:', value: 'Offline' },
+        { label: 'STATUS:', value: 'Running' },
       ],
     },
     skills: {
@@ -337,6 +406,7 @@ export const translations = {
     nav: {
       home: 'Home',
       about: 'About',
+      ailab: 'AI Lab',
       skills: 'Skills',
       projects: 'Projects',
       certifications: 'Certifications',
@@ -428,6 +498,74 @@ export const translations = {
       languages: [
         { lang: 'Turkish', level: 'Native', pct: 100 },
         { lang: 'English', level: 'B2', pct: 75, note: '100% English curriculum' },
+      ],
+    },
+    ailab: {
+      label: 'AI Lab',
+      titlePrefix: 'My',
+      titleHighlight: 'AI Lab',
+      subtitle: 'No cloud. No data leaks. Everything runs on my own hardware, under full control.',
+      activeLabel: 'ACTIVE',
+      terminalTitle: 'ibrahim@local-ai ~',
+      terminalBadge: 'OFFLINE ✓',
+      tools: {
+        ollama: {
+          name: 'Ollama',
+          desc: 'My favourite local LLM runtime. I test models like Llama 3.2, Mistral, and Phi-3 through a clean REST API.',
+          tags: ['LLM Runtime', 'REST API', 'Local Inference'],
+        },
+        lmstudio: {
+          name: 'LM Studio',
+          desc: 'GUI-based GGUF model loader for quick experiments and comparing different quantization levels.',
+          tags: ['GGUF', 'GUI', 'Model Testing'],
+        },
+        huggingface: {
+          name: 'Hugging Face',
+          desc: 'Model downloads, fine-tuning research, and building NLP pipelines with the Transformers library.',
+          tags: ['Transformers', 'Pipeline', 'Fine-tuning'],
+        },
+        python: {
+          name: 'Python',
+          desc: 'Primary language for AI agent systems, automation scripts, and LLM integrations.',
+          tags: ['Agent', 'Scripts', 'Automation'],
+        },
+        langchain: {
+          name: 'LangChain',
+          desc: 'Building complex AI agent flows and RAG systems by chaining local LLMs together.',
+          tags: ['RAG', 'Agent Chain', 'LLM Chaining'],
+        },
+        chroma: {
+          name: 'ChromaDB',
+          desc: 'Local vector database for storing embeddings and performing semantic search in RAG projects.',
+          tags: ['Vector DB', 'Embeddings', 'RAG'],
+        },
+      },
+      privacy: {
+        title: 'Privacy-First AI',
+        tagline: 'Full control, zero cloud dependency',
+        points: [
+          { title: 'No Data Leaks', desc: 'All processing happens on my own hardware. Zero data leaves the machine.' },
+          { title: 'Works Offline', desc: 'No internet required. Once a model is downloaded it runs fully air-gapped.' },
+          { title: 'Hardware Optimised', desc: 'GPU and CPU resources used efficiently for maximum speed and throughput.' },
+          { title: 'Full Customisation', desc: 'Model, prompt, and inference params are entirely under my control. No restrictions.' },
+        ],
+      },
+      terminalLines: [
+        { text: '$ ollama list', color: 'var(--accent-1)', instant: false, speed: 45, pauseAfter: 500 },
+        { text: 'NAME                    SIZE', color: '#64748b', instant: true, delay: 200 },
+        { text: 'llama3.2:3b             2.0 GB', color: 'var(--accent-2)', instant: true, delay: 100 },
+        { text: 'mistral:7b              4.1 GB', color: 'var(--accent-2)', instant: true, delay: 100 },
+        { text: 'phi3:3.8b               2.2 GB', color: 'var(--accent-2)', instant: true, delay: 100 },
+        { text: '$ ollama run llama3.2', color: 'var(--accent-1)', instant: false, speed: 45, pauseAfter: 600 },
+        { text: '>>> Loading model...  ████████ 100%', color: '#f59e0b', instant: true, delay: 400 },
+        { text: '>>> System ready. You can start chatting.', color: 'var(--accent-2)', instant: true, delay: 300 },
+        { text: '>>> _', color: 'var(--accent-2)', instant: true, delay: 200 },
+      ],
+      hwSpecs: [
+        { label: 'GPU:', value: 'Local GPU' },
+        { label: 'RAM:', value: '16 GB' },
+        { label: 'MODE:', value: 'Offline' },
+        { label: 'STATUS:', value: 'Running' },
       ],
     },
     skills: {

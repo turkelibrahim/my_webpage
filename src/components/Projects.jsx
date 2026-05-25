@@ -21,7 +21,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="section container">
-      <SectionLabel number={3} label={t('projects.label')} />
+      <SectionLabel number={4} label={t('projects.label')} />
       <Motion.h2 className="section-title" {...fadeUp(0)}>
         {t('projects.titlePrefix')} <span className="text-gradient">{t('projects.titleHighlight')}</span>
       </Motion.h2>
