@@ -76,7 +76,7 @@ export default function Certifications() {
 
   return (
     <section id="certifications" className="section container">
-      <SectionLabel number={5} label={t('certifications.label')} />
+      <SectionLabel number={4} label={t('certifications.label')} />
       <Motion.h2 className="section-title" {...fadeUp(0)}>
         {t('certifications.titlePrefix')} <span className="text-gradient">{t('certifications.titleHighlight')}</span>
       </Motion.h2>

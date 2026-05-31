@@ -3,7 +3,6 @@ import ThreeBackground from './components/ThreeBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import AILab from './components/AILab';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
@@ -22,8 +21,6 @@ function App() {
         <Hero />
         <div className="section-divider" />
         <About />
-        <div className="section-divider" />
-        <AILab />
         <div className="section-divider" />
         <Skills />
         <div className="section-divider" />

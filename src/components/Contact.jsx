@@ -64,7 +64,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section container">
-      <SectionLabel number={6} label={t('contact.label')} />
+      <SectionLabel number={5} label={t('contact.label')} />
       <Motion.h2 className="section-title" {...fadeUp(0)}>
         {t('contact.titlePrefix')} <span className="text-gradient">{t('contact.titleHighlight')}</span>
       </Motion.h2>
