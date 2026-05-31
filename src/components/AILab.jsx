@@ -82,12 +82,10 @@ function OllamaTerminal({ lines }) {
   const [currentLine, setCurrentLine] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
-  const [done, setDone] = useState(false);
   const containerRef = useRef(null);
 
   useEffect(() => {
-    if (done) return;
-    if (currentLine >= lines.length) { setDone(true); return; }
+    if (currentLine >= lines.length) return;
 
     const line = lines[currentLine];
 
@@ -116,7 +114,7 @@ function OllamaTerminal({ lines }) {
       }, line.pauseAfter || 400);
       return () => clearTimeout(t);
     }
-  }, [currentLine, charIndex, lines, done]);
+  }, [currentLine, charIndex, lines]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -124,7 +122,7 @@ function OllamaTerminal({ lines }) {
     }
   }, [visibleLines, currentText]);
 
-  const activeLine = !done && currentLine < lines.length ? lines[currentLine] : null;
+  const activeLine = currentLine < lines.length ? lines[currentLine] : null;
 
   return (
     <div
