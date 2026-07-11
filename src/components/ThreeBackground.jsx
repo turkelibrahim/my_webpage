@@ -97,7 +97,12 @@ function ParticleField() {
 export default function ThreeBackground() {
   return (
     <div id="canvas-container">
-      <Canvas camera={{ position: [0, 0, 3.2], fov: 75 }} dpr={[1, 1.5]}>
+      <Canvas 
+        camera={{ position: [0, 0, 3.2], fov: 75 }} 
+        dpr={[1, 1.5]}
+        gl={{ powerPreference: "high-performance", antialias: false, alpha: false }}
+      >
+        <color attach="background" args={['#000000']} />
         <ParticleField />
       </Canvas>
     </div>

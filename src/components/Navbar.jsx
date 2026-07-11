@@ -72,6 +72,11 @@ export default function Navbar() {
           <img
             src="/it-logo.svg"
             alt={t('nav.logoAlt')}
+            title="İbrahim Türkel Logo"
+            width="158"
+            height="42"
+            loading="eager"
+            fetchpriority="high"
             style={{
               width: '158px',
               height: '42px',

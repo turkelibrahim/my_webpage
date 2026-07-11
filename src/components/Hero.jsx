@@ -82,7 +82,7 @@ export default function Hero() {
               <span className="text-gradient">{t('hero.name')}</span>
             </Motion.h1>
 
-            <Motion.p variants={item} className="hero-description" style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '2rem', maxWidth: '480px' }}>
+            <Motion.h2 variants={item} className="hero-description" style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '2rem', maxWidth: '480px', fontWeight: 'normal', margin: '0 0 2rem 0' }}>
               {t('hero.descriptionStart')}
               <strong style={{ color: 'var(--text-primary)' }}>{t('hero.degree')}</strong>
               {t('hero.descriptionMiddle')}
@@ -90,7 +90,7 @@ export default function Hero() {
               {t('hero.descriptionAfterLlm')}
               <strong style={{ color: 'var(--accent-2)' }}>{t('hero.aiApps')}</strong>
               {t('hero.descriptionEnd')}
-            </Motion.p>
+            </Motion.h2>
 
             <Motion.div variants={item} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
               <a href="#contact" className="btn-primary">
