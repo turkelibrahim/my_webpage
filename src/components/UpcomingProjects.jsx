@@ -1,5 +1,5 @@
 import { motion as Motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Beaker } from 'lucide-react';
 import SectionLabel from './SectionLabel';
 import { useLanguage } from '../i18n/useLanguage';
 
@@ -14,21 +14,53 @@ function fadeUp(delay = 0) {
 
 export default function UpcomingProjects() {
   const { currentLanguage } = useLanguage();
-  const color = 'var(--accent-1)';
-  const color2 = 'var(--accent-2)';
-  
+  const color = 'var(--accent-2)';
+
+  const content = {
+    tr: {
+      sectionTitlePrefix: 'Geliştirmekte Olduğumuz',
+      sectionTitleHighlight: 'Projeler',
+      subtitle: 'Yapay zeka alanında şekillenen yeni inisiyatifler.',
+      statusLabel: 'IN DEVELOPMENT',
+      projectTitle: 'Ottoman Archive Intelligence',
+      description: 'Ana AI_COMPANY_OS mimarimize ek olarak, şu anda özelleştirilmiş bir NLP platformu geliştiriyoruz. Bu proje; tarihi Osmanlı arşivlerini, matbu eserleri ve el yazmalarını modern Türkçeye çevirme, analiz etme ve indeksleme üzerine odaklanmaktadır. Gelişmiş yapay zeka kullanarak OCR hatalarını düzeltiyor, tarihi belgeleri bağlamsallaştırıyor ve araştırmacılar ile akademik kurumlar için derin anlamsal arama imkanı sunuyoruz.',
+      capabilities: [
+        'Osmanlıca Belge İşleme',
+        'OCR Hata Düzeltme',
+        'Tarihi Metin Analizi',
+        'Modern Türkçe Çeviri',
+        'Anlamsal Arama'
+      ],
+      githubBtn: 'GitHub Üzerinde İncele'
+    },
+    en: {
+      sectionTitlePrefix: 'Current',
+      sectionTitleHighlight: 'R&D Projects',
+      subtitle: 'Initiatives shaping the future of AI.',
+      statusLabel: 'IN DEVELOPMENT',
+      projectTitle: 'Ottoman Archive Intelligence',
+      description: 'In addition to our core AI_COMPANY_OS architecture, we are currently developing a specialized NLP platform. This project focuses on translating, analyzing, and indexing historical Ottoman archives, printed works, and manuscripts into modern Turkish. We use advanced AI to correct OCR errors, contextualize historical documents, and enable deep semantic search for researchers and academic institutions.',
+      capabilities: [
+        'Ottoman Turkish document processing',
+        'OCR error correction',
+        'Historical text analysis',
+        'Modern Turkish translation',
+        'Semantic search'
+      ],
+      githubBtn: 'View Repository on GitHub'
+    }
+  };
+
+  const currentContent = content[currentLanguage];
+
   return (
     <section id="upcoming-projects" className="section container">
-      <SectionLabel number={4} label="R&D" />
+      <SectionLabel number={4} label={currentLanguage === 'tr' ? 'Ar-Ge Projeleri' : 'R&D Projects'} />
       <Motion.h2 className="section-title" {...fadeUp(0)}>
-        {currentLanguage === 'tr' ? (
-          <>Geliştirmekte Olduğumuz <span className="text-gradient">Projeler</span></>
-        ) : (
-          <>Upcoming <span className="text-gradient">R&D Projects</span></>
-        )}
+        {currentContent.sectionTitlePrefix} <span className="text-gradient">{currentContent.sectionTitleHighlight}</span>
       </Motion.h2>
       <Motion.p className="section-subtitle" {...fadeUp(0.08)}>
-        {currentLanguage === 'tr' ? 'Yapay zeka alanında şekillenen yeni inisiyatifler.' : 'Initiatives shaping the future of AI.'}
+        {currentContent.subtitle}
       </Motion.p>
 
       <div style={{ marginTop: '3rem' }}>
@@ -38,32 +70,48 @@ export default function UpcomingProjects() {
           whileHover={{ y: -7, boxShadow: `0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px ${color}30` }}
           style={{ padding: '2.5rem', position: 'relative', overflow: 'hidden' }}
         >
+          {/* Subtle Accent Glow */}
           <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', background: 'radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }} />
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', position: 'relative', zIndex: 1 }}>
-            <span className="badge" style={{ background: `${color}15`, color, borderColor: `${color}35` }}>
-              NLP Platform
+          {/* Top Label & Icon */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem', position: 'relative', zIndex: 1 }}>
+            <span className="badge" style={{ background: `${color}15`, color, borderColor: `${color}35`, display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem' }}>
+              <Beaker size={12} /> {currentContent.statusLabel}
             </span>
             <ExternalLink size={15} color={color} style={{ opacity: 0.5, marginTop: '2px' }} />
           </div>
 
-          <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', lineHeight: 1.35, marginBottom: '1rem', position: 'relative', zIndex: 1 }}>
-            Ottoman Archive Intelligence (Powered by Claude API)
+          {/* Title */}
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', lineHeight: 1.35, marginBottom: '1.25rem', position: 'relative', zIndex: 1 }}>
+            {currentContent.projectTitle}
           </h3>
 
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '2rem', position: 'relative', zIndex: 1 }}>
-            In addition to our core AI_COMPANY_OS architecture, we are currently developing a specialized NLP platform. This project focuses on translating, analyzing, and indexing historical Ottoman archives, printed works, and manuscripts into modern Turkish. We use advanced AI to correct OCR errors, contextualize historical documents, and enable deep semantic search for researchers and academic institutions.
+          {/* Description */}
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.75, marginBottom: '1.75rem', position: 'relative', zIndex: 1 }}>
+            {currentContent.description}
           </p>
 
-          <a 
-            href="https://github.com/turkelibrahim/INTELLIGENT-OTTOMAN-TURKISH-ASSISTANT.git" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="btn btn-primary"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', position: 'relative', zIndex: 1, padding: '0.75rem 1.5rem', background: `linear-gradient(135deg, ${color}, ${color2})`, color: '#fff', borderRadius: '8px', fontWeight: 600, textDecoration: 'none', border: 'none', cursor: 'pointer' }}
-          >
-            View Repository on GitHub <ExternalLink size={16} />
-          </a>
+          {/* Capabilities/Focus List */}
+          <ul style={{ padding: 0, margin: '0 0 2rem', listStyle: 'none', position: 'relative', zIndex: 1 }}>
+            {currentContent.capabilities.map(point => (
+              <li key={point} style={{ display: 'flex', gap: '0.55rem', alignItems: 'flex-start', color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.65, marginBottom: '0.6rem' }}>
+                <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, marginTop: '0.52rem', flexShrink: 0 }} />
+                {point}
+              </li>
+            ))}
+          </ul>
+
+          {/* GitHub Action */}
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <a 
+              href="https://github.com/turkelibrahim/INTELLIGENT-OTTOMAN-TURKISH-ASSISTANT" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color, fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none' }}
+            >
+              {currentContent.githubBtn} <ExternalLink size={14} />
+            </a>
+          </div>
         </Motion.div>
       </div>
     </section>
