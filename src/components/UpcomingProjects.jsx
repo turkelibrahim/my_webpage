@@ -73,44 +73,65 @@ export default function UpcomingProjects() {
           {/* Subtle Accent Glow */}
           <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', background: 'radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }} />
 
-          {/* Top Label & Icon */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem', position: 'relative', zIndex: 1 }}>
-            <span className="badge" style={{ background: `${color}15`, color, borderColor: `${color}35`, display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem' }}>
-              <Beaker size={12} /> {currentContent.statusLabel}
-            </span>
-            <ExternalLink size={15} color={color} style={{ opacity: 0.5, marginTop: '2px' }} />
-          </div>
+          <div className="grid-cols-2" style={{ gap: '3rem', alignItems: 'center', position: 'relative', zIndex: 1 }}>
+            
+            {/* Left Content Column */}
+            <div>
+              {/* Top Label & Icon */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+                <span className="badge" style={{ background: `${color}15`, color, borderColor: `${color}35`, display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem' }}>
+                  <Beaker size={12} /> {currentContent.statusLabel}
+                </span>
+              </div>
 
-          {/* Title */}
-          <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', lineHeight: 1.35, marginBottom: '1.25rem', position: 'relative', zIndex: 1 }}>
-            {currentContent.projectTitle}
-          </h3>
+              {/* Title */}
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff', lineHeight: 1.35, marginBottom: '1.25rem' }}>
+                {currentContent.projectTitle}
+              </h3>
 
-          {/* Description */}
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.75, marginBottom: '1.75rem', position: 'relative', zIndex: 1 }}>
-            {currentContent.description}
-          </p>
+              {/* Description */}
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.75, marginBottom: '1.75rem' }}>
+                {currentContent.description}
+              </p>
 
-          {/* Capabilities/Focus List */}
-          <ul style={{ padding: 0, margin: '0 0 2rem', listStyle: 'none', position: 'relative', zIndex: 1 }}>
-            {currentContent.capabilities.map(point => (
-              <li key={point} style={{ display: 'flex', gap: '0.55rem', alignItems: 'flex-start', color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.65, marginBottom: '0.6rem' }}>
-                <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, marginTop: '0.52rem', flexShrink: 0 }} />
-                {point}
-              </li>
-            ))}
-          </ul>
+              {/* Capabilities/Focus List */}
+              <ul style={{ padding: 0, margin: '0 0 2rem', listStyle: 'none' }}>
+                {currentContent.capabilities.map(point => (
+                  <li key={point} style={{ display: 'flex', gap: '0.55rem', alignItems: 'flex-start', color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.65, marginBottom: '0.6rem' }}>
+                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: color, marginTop: '0.52rem', flexShrink: 0 }} />
+                    {point}
+                  </li>
+                ))}
+              </ul>
 
-          {/* GitHub Action */}
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <a 
-              href="https://github.com/turkelibrahim/INTELLIGENT-OTTOMAN-TURKISH-ASSISTANT" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color, fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none' }}
-            >
-              {currentContent.githubBtn} <ExternalLink size={14} />
-            </a>
+              {/* GitHub Action */}
+              <div>
+                <a 
+                  href="https://github.com/turkelibrahim/INTELLIGENT-OTTOMAN-TURKISH-ASSISTANT" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color, fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none' }}
+                >
+                  {currentContent.githubBtn} <ExternalLink size={14} />
+                </a>
+              </div>
+            </div>
+
+            {/* Right Image Column */}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <img 
+                src="/ottoman-project.png" 
+                alt="Ottoman Archive Intelligence UI" 
+                style={{ 
+                  width: '100%', 
+                  height: 'auto', 
+                  borderRadius: '12px', 
+                  border: `1px solid ${color}30`, 
+                  boxShadow: `0 20px 40px rgba(0,0,0,0.4)` 
+                }} 
+              />
+            </div>
+
           </div>
         </Motion.div>
       </div>
