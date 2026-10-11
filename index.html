@@ -1,77 +1,170 @@
 <!doctype html>
-<html lang="tr" translate="no" class="notranslate">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google" content="notranslate" />
-    <meta name="description" content="İbrahim Türkel'in kişisel gazetesi. Yapay zeka haberleri, teknoloji gündemi, LLM gelişmeleri ve Full Stack Web Development projeleri." />
-    <meta name="keywords" content="İbrahim Türkel, yapay zeka haberleri, teknoloji gündemi, haber, gazete, kişisel gazete, AI Engineer, ekonomi, dünya haberleri" />
+    
+    <!-- Title & Primary Meta Tags -->
+    <title>İbrahim Türkel | AI Developer &amp; Bilgisayar Mühendisliği Öğrencisi</title>
+    <meta name="title" content="İbrahim Türkel | AI Developer &amp; Bilgisayar Mühendisliği Öğrencisi" />
+    <meta name="description" content="İbrahim Türkel — Ankara Bilim Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yapay zekâ geliştirme, Python, otonom çoklu ajanlar, LLM ve lokal AI sistemleri portfolyosu." />
+    <meta name="keywords" content="İbrahim Türkel, Ibrahim Turkel, AI Developer, Bilgisayar Mühendisliği, Ankara Bilim Üniversitesi, Yapay Zekâ, Otonom Ajanlar, LLM, Ollama, Python, Multi-Agent Systems" />
     <meta name="author" content="İbrahim Türkel" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://ibrahimturkel.com.tr/" />
     
-    <meta property="og:type" content="website" />
+    <!-- Google Search Console Doğrulama Etiketi -->
+    <meta name="google-site-verification" content="hr_f7TVQ0YMlOTAyjIpiIKXJb_lSY94uURYyqWEGoho" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="profile" />
     <meta property="og:locale" content="tr_TR" />
     <meta property="og:url" content="https://ibrahimturkel.com.tr/" />
-    <meta property="og:title" content="İbrahim Türkel | Yapay Zeka & Teknoloji Haberleri" />
-    <meta property="og:description" content="Yapay zeka haberleri, teknoloji gündemi ve LLM projeleri için İbrahim Türkel'in kişisel gazetesi." />
+    <meta property="og:title" content="İbrahim Türkel | AI Developer &amp; Bilgisayar Mühendisliği Öğrencisi" />
+    <meta property="og:description" content="İbrahim Türkel — Ankara Bilim Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yapay zekâ, Python, otonom ajanlar ve LLM sistemleri portfolyosu." />
     <meta property="og:site_name" content="İbrahim Türkel" />
-    <meta property="og:image" content="https://ibrahimturkel.com.tr/favicon.svg" />
+    <meta property="og:image" content="https://ibrahimturkel.com.tr/it-logo.svg" />
     
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="İbrahim Türkel | Yapay Zeka & Teknoloji Haberleri" />
-    <meta name="twitter:description" content="Yapay zeka haberleri, teknoloji gündemi ve LLM projeleri için İbrahim Türkel'in kişisel gazetesi." />
-    <meta name="twitter:image" content="https://ibrahimturkel.com.tr/favicon.svg" />
+    <meta name="twitter:title" content="İbrahim Türkel | AI Developer &amp; Bilgisayar Mühendisliği Öğrencisi" />
+    <meta name="twitter:description" content="İbrahim Türkel — Ankara Bilim Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yapay zekâ, Python, otonom ajanlar ve LLM sistemleri portfolyosu." />
+    <meta name="twitter:image" content="https://ibrahimturkel.com.tr/it-logo.svg" />
 
-    <!-- Security SEO & PWA -->
+    <!-- Performance & Font Preconnects (Core Web Vitals) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- Security, Theme & PWA -->
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#020617" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
+    <!-- Schema.org JSON-LD Structured Data (Doğrulanmış Kimlik & Entity SEO) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": "WebSite",
-            "@id": "https://ibrahimturkel.com.tr/#website",
+            "@type": "ProfilePage",
+            "@id": "https://ibrahimturkel.com.tr/#profilepage",
             "url": "https://ibrahimturkel.com.tr/",
-            "name": "İbrahim Türkel | AI Engineer & Kişisel Gazete",
-            "description": "Yapay zeka haberleri, teknoloji gündemi ve AI Engineering projeleri.",
-            "publisher": { "@id": "https://ibrahimturkel.com.tr/#organization" },
-            "inLanguage": "tr-TR"
-          },
-          {
-            "@type": "NewsMediaOrganization",
-            "@id": "https://ibrahimturkel.com.tr/#organization",
-            "name": "İbrahim Türkel Teknoloji Gündemi",
-            "url": "https://ibrahimturkel.com.tr/",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://ibrahimturkel.com.tr/favicon.svg"
+            "name": "İbrahim Türkel | AI Developer & Bilgisayar Mühendisliği Öğrencisi",
+            "description": "İbrahim Türkel — Ankara Bilim Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yapay zekâ, Python, otonom ajanlar, LLM sistemleri ve AI proje geliştirme çalışmaları.",
+            "inLanguage": "tr-TR",
+            "mainEntity": {
+              "@id": "https://ibrahimturkel.com.tr/#person"
             }
           },
           {
             "@type": "Person",
             "@id": "https://ibrahimturkel.com.tr/#person",
             "name": "İbrahim Türkel",
-            "jobTitle": "AI Engineer & Full Stack Web Developer",
+            "alternateName": ["Ibrahim Turkel"],
+            "jobTitle": "AI Developer & Computer Engineering Student",
+            "description": "Ankara Bilim Üniversitesi Bilgisayar Mühendisliği (%100 İngilizce) 3. sınıf öğrencisi. Yapay zekâ geliştirme, Python, otonom çoklu ajan sistemleri (multi-agent), büyük dil modelleri (LLM), lokal AI mimarileri (Ollama) ve veritabanı optimizasyonu üzerine çalışmaktadır.",
             "url": "https://ibrahimturkel.com.tr/",
+            "image": "https://ibrahimturkel.com.tr/it-logo.svg",
+            "email": "mailto:ibrahimturkel18@gmail.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Ankara",
+              "addressCountry": "TR"
+            },
             "sameAs": [
               "https://github.com/turkelibrahim",
-              "https://linkedin.com/in/ibrahim-türkel"
+              "https://www.linkedin.com/in/ibrahim-t%C3%BCrkel-065283261"
+            ],
+            "affiliation": {
+              "@type": "CollegeOrUniversity",
+              "name": "Ankara Bilim Üniversitesi",
+              "url": "https://ankarabilim.edu.tr/"
+            },
+            "knowsAbout": [
+              "Artificial Intelligence",
+              "AI Developer",
+              "Autonomous Agents",
+              "Multi-Agent Systems",
+              "Large Language Models (LLM)",
+              "Python",
+              "Ollama",
+              "Gemini API",
+              "NVIDIA API",
+              "Computer Engineering",
+              "Natural Language Processing (NLP)",
+              "PostgreSQL",
+              "MySQL",
+              "C++",
+              "System Architecture"
             ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://ibrahimturkel.com.tr/#website",
+            "url": "https://ibrahimturkel.com.tr/",
+            "name": "İbrahim Türkel — Kişisel Web Sitesi",
+            "description": "İbrahim Türkel kişisel web sitesi ve portfolyosu. Yapay zekâ geliştirme, otonom ajanlar, LLM sistemleri ve bilgisayar mühendisliği projeleri.",
+            "publisher": {
+              "@id": "https://ibrahimturkel.com.tr/#person"
+            },
+            "inLanguage": "tr-TR"
           }
         ]
       }
     </script>
-    <title>İbrahim Türkel | AI Engineer, Yapay Zeka Haberleri & Teknoloji</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- SPA Crawler & Bot Fallback: Arama motoru botları JavaScript render etmeden önce tam semantik içeriği doğrudan okur -->
+      <noscript>
+        <main style="max-width: 820px; margin: 40px auto; padding: 28px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #f1f5f9; background: #020617; line-height: 1.65; border-radius: 12px;">
+          <header>
+            <h1 style="color: #00f2fe; margin-bottom: 8px; font-size: 2rem;">İbrahim Türkel — AI Developer &amp; Bilgisayar Mühendisliği Öğrencisi</h1>
+            <p><strong>Eğitim:</strong> Ankara Bilim Üniversitesi (%100 İngilizce) Bilgisayar Mühendisliği 3. Sınıf Öğrencisi (2022 - Günümüz | Beklenen Mezuniyet: 2027).</p>
+            <p><strong>Konum:</strong> Ankara, Türkiye</p>
+          </header>
+          
+          <section>
+            <h2 style="color: #38bdf8; margin-top: 28px; font-size: 1.4rem;">Hakkında ve Kariyer Hedefi</h2>
+            <p>İbrahim Türkel, yapay zekâ geliştirme, Python, otonom çoklu ajan mimarileri (multi-agent), büyük dil modelleri (LLM) ve lokal AI sistemleri üzerine odaklanan bir bilgisayar mühendisliği öğrencisidir. Bulut bağımlılığı olmadan çalışan lokal LLM'ler (Ollama, LM Studio) ile Gemini ve NVIDIA API gibi servisler üzerinden hibrit yapay zekâ model entegrasyonları gerçekleştirmektedir.</p>
+          </section>
+
+          <section>
+            <h2 style="color: #38bdf8; margin-top: 28px; font-size: 1.4rem;">Öne Çıkan Projeler</h2>
+            <ul>
+              <li><strong>AI_COMPANY_OS:</strong> Çoklu yapay zekâ ajanlarının koordinasyonu, görev dağıtımı, ortak bellek ve CEO orkestrasyonu mimarisi üzerine geliştirilen otonom AI sistemi.</li>
+              <li><strong>Intelligent Ottoman Turkish Assistant:</strong> Tarihi Osmanlı arşivlerini, matbu eserleri ve el yazmalarını inceleme, OCR hata düzeltme, Latin transkripsiyonu ve günümüz Türkçesine çeviri NLP projesi.</li>
+              <li><strong>Lokal LLM &amp; AI Agent Entegrasyon Çalışmaları:</strong> Ollama, LM Studio ve Hugging Face ile yerel donanımda çalışan açık kaynak modeller ve otonom ajan iş akışları.</li>
+              <li><strong>Kişiselleştirilmiş AI Haber Gazetesi:</strong> Kullanıcı okuma alışkanlıklarını analiz ederek kişiselleştirilmiş içerik sunan tavsiye motoru ve NLP altyapısı.</li>
+              <li><strong>Yapay Zeka Destekli Quiz Platformu:</strong> Kullanıcı performansına göre soru zorluk seviyesini dinamik ayarlayan adaptif test sistemi.</li>
+              <li><strong>Yapay Zeka Destekli İngilizce Eğitim Platformu:</strong> Kişiye özel öğrenme yolları ve performans analizi sunan backend mimarisi.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 style="color: #38bdf8; margin-top: 28px; font-size: 1.4rem;">Teknik Yetkinlikler</h2>
+            <p><strong>Yapay Zeka &amp; LLM:</strong> Ollama, LM Studio, Hugging Face Transformers, Prompt Engineering, Autonomous Agents, Gemini API, NVIDIA API.<br />
+            <strong>Programlama Dilleri:</strong> Python, C++, PHP, Java, C#.<br />
+            <strong>Backend &amp; Veritabanı:</strong> RESTful API Tasarımı, PostgreSQL, MySQL, Sorgu Optimizasyonu, İlişkisel Tasarım.<br />
+            <strong>Bilgisayar Bilimi &amp; Standartlar:</strong> Veri Yapıları, Algoritma Tasarımı, Big-O Analizi, SOLID, Clean Code, DRY, Git &amp; GitHub.</p>
+          </section>
+
+          <section>
+            <h2 style="color: #38bdf8; margin-top: 28px; font-size: 1.4rem;">İletişim ve Resmi Bağlantılar</h2>
+            <p>
+              E-posta: <a href="mailto:ibrahimturkel18@gmail.com" style="color: #00f2fe;">ibrahimturkel18@gmail.com</a><br />
+              GitHub: <a href="https://github.com/turkelibrahim" style="color: #00f2fe; text-decoration: underline;">github.com/turkelibrahim</a><br />
+              LinkedIn: <a href="https://www.linkedin.com/in/ibrahim-t%C3%BCrkel-065283261" style="color: #00f2fe; text-decoration: underline;">linkedin.com/in/ibrahim-türkel-065283261</a><br />
+              Web Sitesi: <a href="https://ibrahimturkel.com.tr/" style="color: #00f2fe; text-decoration: underline;">https://ibrahimturkel.com.tr/</a>
+            </p>
+          </section>
+        </main>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

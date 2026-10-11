@@ -13,93 +13,58 @@ import CustomCursor from './components/CustomCursor';
 import { ScrollProgressBar, BackToTop } from './components/ScrollProgress';
 
 function App() {
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://ibrahimturkel.com.tr/#website",
-        "url": "https://ibrahimturkel.com.tr/",
-        "name": "İbrahim Türkel | AI Engineer & Kişisel Gazete",
-        "description": "Yapay zeka haberleri, teknoloji gündemi ve AI Engineering projeleri.",
-        "publisher": {
-          "@id": "https://ibrahimturkel.com.tr/#organization"
-        },
-        "inLanguage": "tr-TR"
-      },
-      {
-        "@type": "NewsMediaOrganization",
-        "@id": "https://ibrahimturkel.com.tr/#organization",
-        "name": "İbrahim Türkel Teknoloji Gündemi",
-        "url": "https://ibrahimturkel.com.tr/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://ibrahimturkel.com.tr/favicon.svg"
-        }
-      },
-      {
-        "@type": "Person",
-        "@id": "https://ibrahimturkel.com.tr/#person",
-        "name": "İbrahim Türkel",
-        "jobTitle": "AI Engineer & Full Stack Web Developer",
-        "url": "https://ibrahimturkel.com.tr/",
-        "sameAs": [
-          "https://github.com/turkelibrahim",
-          "https://linkedin.com/in/ibrahim-türkel"
-        ]
-      }
-    ]
-  };
-
   return (
     <>
       <Helmet>
         <html lang="tr" />
-        <title>İbrahim Türkel | AI Engineer, Yapay Zeka Haberleri & Teknoloji</title>
-        <meta name="description" content="İbrahim Türkel'in kişisel gazetesi. Yapay zeka haberleri, teknoloji gündemi, LLM gelişmeleri ve Full Stack Web Development projeleri." />
-        <meta name="keywords" content="İbrahim Türkel, yapay zeka haberleri, teknoloji gündemi, haber, gazete, kişisel gazete, AI Engineer, ekonomi, dünya haberleri" />
+        <title>İbrahim Türkel | AI Developer &amp; Bilgisayar Mühendisliği Öğrencisi</title>
+        <meta name="description" content="İbrahim Türkel — Ankara Bilim Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yapay zekâ geliştirme, Python, otonom çoklu ajanlar, LLM ve lokal AI sistemleri portfolyosu." />
+        <meta name="keywords" content="İbrahim Türkel, Ibrahim Turkel, AI Developer, Bilgisayar Mühendisliği, Ankara Bilim Üniversitesi, Yapay Zekâ, Otonom Ajanlar, LLM, Ollama, Python, Multi-Agent Systems" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="google-site-verification" content="hr_f7TVQ0YMlOTAyjIpiIKXJb_lSY94uURYyqWEGoho" />
         <link rel="canonical" href="https://ibrahimturkel.com.tr/" />
         
-        {/* Open Graph / Facebook / LinkedIn */}
-        <meta property="og:type" content="website" />
+        {/* Open Graph / Social */}
+        <meta property="og:type" content="profile" />
         <meta property="og:url" content="https://ibrahimturkel.com.tr/" />
-        <meta property="og:title" content="İbrahim Türkel | Yapay Zeka & Teknoloji Haberleri" />
-        <meta property="og:description" content="Yapay zeka haberleri, teknoloji gündemi ve LLM projeleri için İbrahim Türkel'in kişisel gazetesi." />
-        <meta property="og:image" content="https://ibrahimturkel.com.tr/favicon.svg" />
+        <meta property="og:title" content="İbrahim Türkel | AI Developer &amp; Bilgisayar Mühendisliği Öğrencisi" />
+        <meta property="og:description" content="İbrahim Türkel — Ankara Bilim Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yapay zekâ, Python, otonom ajanlar ve LLM sistemleri portfolyosu." />
+        <meta property="og:site_name" content="İbrahim Türkel" />
+        <meta property="og:image" content="https://ibrahimturkel.com.tr/it-logo.svg" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="İbrahim Türkel | Yapay Zeka & Teknoloji Haberleri" />
-        <meta name="twitter:description" content="Yapay zeka haberleri, teknoloji gündemi ve LLM projeleri için İbrahim Türkel'in kişisel gazetesi." />
-        <meta name="twitter:image" content="https://ibrahimturkel.com.tr/favicon.svg" />
+        <meta name="twitter:title" content="İbrahim Türkel | AI Developer &amp; Bilgisayar Mühendisliği Öğrencisi" />
+        <meta name="twitter:description" content="İbrahim Türkel — Ankara Bilim Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yapay zekâ, Python, otonom ajanlar ve LLM sistemleri portfolyosu." />
+        <meta name="twitter:image" content="https://ibrahimturkel.com.tr/it-logo.svg" />
 
         {/* Security & PWA */}
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#020617" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
-        
-        <script type="application/ld+json">
-          {JSON.stringify(schemaData)}
-        </script>
       </Helmet>
       <CustomCursor />
       <ScrollProgressBar />
       <ThreeBackground />
       <div id="app-content">
-        <Navbar />
-        <Hero />
-        <div className="section-divider" />
-        <About />
-        <div className="section-divider" />
-        <Skills />
-        <div className="section-divider" />
-        <Projects />
-        <div className="section-divider" />
-        <UpcomingProjects />
-        <div className="section-divider" />
-        <Certifications />
-        <div className="section-divider" />
-        <Contact />
+        <header>
+          <Navbar />
+        </header>
+        <main id="main-content">
+          <Hero />
+          <div className="section-divider" />
+          <About />
+          <div className="section-divider" />
+          <Skills />
+          <div className="section-divider" />
+          <Projects />
+          <div className="section-divider" />
+          <UpcomingProjects />
+          <div className="section-divider" />
+          <Certifications />
+          <div className="section-divider" />
+          <Contact />
+        </main>
       </div>
       <BackToTop />
     </>

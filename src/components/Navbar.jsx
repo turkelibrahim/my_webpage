@@ -119,7 +119,7 @@ export default function Navbar() {
           <a href="https://github.com/turkelibrahim" target="_blank" rel="noreferrer" className="nav-icon-btn" aria-label="GitHub">
             <GithubIcon size={18} />
           </a>
-          <a href="https://linkedin.com/in/ibrahim-türkel" target="_blank" rel="noreferrer" className="nav-icon-btn" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/ibrahim-t%C3%BCrkel-065283261" target="_blank" rel="noopener noreferrer" className="nav-icon-btn" aria-label="LinkedIn">
             <LinkedinIcon size={18} />
           </a>
           <LanguageSwitcher />

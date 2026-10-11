@@ -19,33 +19,33 @@ export default function UpcomingProjects() {
   const content = {
     tr: {
       sectionTitlePrefix: 'Geliştirmekte Olduğumuz',
-      sectionTitleHighlight: 'Projeler',
-      subtitle: 'Yapay zeka alanında şekillenen yeni inisiyatifler.',
-      statusLabel: 'IN DEVELOPMENT',
-      projectTitle: 'Ottoman Archive Intelligence',
-      description: 'Ana AI_COMPANY_OS mimarimize ek olarak, şu anda özelleştirilmiş bir NLP platformu geliştiriyoruz. Bu proje; tarihi Osmanlı arşivlerini, matbu eserleri ve el yazmalarını modern Türkçeye çevirme, analiz etme ve indeksleme üzerine odaklanmaktadır. Gelişmiş yapay zeka kullanarak OCR hatalarını düzeltiyor, tarihi belgeleri bağlamsallaştırıyor ve araştırmacılar ile akademik kurumlar için derin anlamsal arama imkanı sunuyoruz.',
+      sectionTitleHighlight: 'Ar-Ge Projeleri',
+      subtitle: 'Tarihsel metinler ve Osmanlı arşivleri için yapay zekâ destekli analiz inisiyatifi.',
+      statusLabel: 'AR-GE AŞAMASINDA',
+      projectTitle: 'Intelligent Ottoman Turkish Assistant',
+      description: 'Intelligent Ottoman Turkish Assistant, tarihi Osmanlı arşivlerini, matbu eserleri ve el yazmalarını incelemeye yönelik bağımsız bir yapay zekâ ve doğal dil işleme (NLP) araştırma projesidir. Belge işleme, OCR hata düzeltme, metinlerin Latin harflerine aktarımı, günümüz Türkçesine çevirisi ve anlamsal belge analizi süreçlerine odaklanmaktadır.',
       capabilities: [
-        'Osmanlıca Belge İşleme',
-        'OCR Hata Düzeltme',
-        'Tarihi Metin Analizi',
-        'Modern Türkçe Çeviri',
-        'Anlamsal Arama'
+        'Osmanlıca Belge İşleme & Analiz',
+        'Gelişmiş OCR Hata Düzeltme',
+        'Latin Harflerine Transkripsiyon',
+        'Günümüz Türkçesine Çeviri',
+        'Anlamsal ve Tarihsel Metin Arama'
       ],
       githubBtn: 'GitHub Üzerinde İncele'
     },
     en: {
       sectionTitlePrefix: 'Current',
       sectionTitleHighlight: 'R&D Projects',
-      subtitle: 'Initiatives shaping the future of AI.',
+      subtitle: 'AI-assisted analysis initiative for historical manuscripts and Ottoman archives.',
       statusLabel: 'IN DEVELOPMENT',
-      projectTitle: 'Ottoman Archive Intelligence',
-      description: 'In addition to our core AI_COMPANY_OS architecture, we are currently developing a specialized NLP platform. This project focuses on translating, analyzing, and indexing historical Ottoman archives, printed works, and manuscripts into modern Turkish. We use advanced AI to correct OCR errors, contextualize historical documents, and enable deep semantic search for researchers and academic institutions.',
+      projectTitle: 'Intelligent Ottoman Turkish Assistant',
+      description: 'Intelligent Ottoman Turkish Assistant is an independent AI and NLP research project focused on analyzing, transliterating, and translating historical Ottoman archives, printed works, and manuscripts into modern Turkish. It targets document processing, OCR error correction, Latin transliteration, modern Turkish translation, and semantic document analysis for academic and archival research.',
       capabilities: [
-        'Ottoman Turkish document processing',
-        'OCR error correction',
-        'Historical text analysis',
+        'Ottoman Turkish document processing & analysis',
+        'Advanced OCR error correction',
+        'Transliteration to Latin script',
         'Modern Turkish translation',
-        'Semantic search'
+        'Semantic & historical text search'
       ],
       githubBtn: 'View Repository on GitHub'
     }
@@ -121,7 +121,9 @@ export default function UpcomingProjects() {
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <img 
                 src="/ottoman-project.png" 
-                alt="Ottoman Archive Intelligence UI" 
+                alt="Intelligent Ottoman Turkish Assistant — Tarihi Osmanlı Arşivleri Yapay Zekâ Analiz ve Çeviri Projesi Arayüzü" 
+                loading="lazy"
+                decoding="async"
                 style={{ 
                   width: '100%', 
                   height: 'auto', 

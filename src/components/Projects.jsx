@@ -3,7 +3,7 @@ import { Briefcase, ExternalLink } from 'lucide-react';
 import SectionLabel from './SectionLabel';
 import { useLanguage } from '../i18n/useLanguage';
 
-const PROJECT_COLORS = ['var(--accent-1)', 'var(--accent-2)', 'var(--accent-3)', 'var(--accent-1)', 'var(--accent-2)'];
+const PROJECT_COLORS = ['var(--accent-1)', 'var(--accent-2)', 'var(--accent-3)', 'var(--accent-1)', 'var(--accent-2)', 'var(--accent-3)'];
 
 function fadeUp(delay = 0) {
   return {
@@ -31,7 +31,7 @@ export default function Projects() {
 
       <div className="grid-cols-2" style={{ marginBottom: '3rem' }}>
         {projects.map((project, index) => {
-          const color = PROJECT_COLORS[index];
+          const color = PROJECT_COLORS[index % PROJECT_COLORS.length];
           return (
             <Motion.div
               key={project.number}
@@ -73,7 +73,13 @@ export default function Projects() {
               </div>
 
               {project.repoUrl && (
-                <a href={project.repoUrl} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color, fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none', position: 'relative', zIndex: 1 }}>
+                <a 
+                  href={project.repoUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label={`${project.title} — ${t('common.githubRepo')}`}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color, fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none', position: 'relative', zIndex: 1 }}
+                >
                   {t('common.githubRepo')} <ExternalLink size={14} />
                 </a>
               )}

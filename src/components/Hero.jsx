@@ -77,12 +77,20 @@ export default function Hero() {
               </span>
             </Motion.div>
 
-            <Motion.h1 variants={item} className="hero-title" style={{ fontSize: 'clamp(2.6rem, 4vw, 3.8rem)', fontWeight: 800, lineHeight: 1.08, marginBottom: '1.25rem' }}>
-              {t('hero.greeting')}<br />
+            <Motion.h1 variants={item} className="hero-title" style={{ fontSize: 'clamp(2.6rem, 4vw, 3.8rem)', fontWeight: 800, lineHeight: 1.08, marginBottom: '0.75rem' }}>
+              <span style={{ display: 'block', fontSize: '0.45em', fontWeight: 500, letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>
+                {t('hero.greeting')}
+              </span>
               <span className="text-gradient">{t('hero.name')}</span>
             </Motion.h1>
 
-            <Motion.h2 variants={item} className="hero-description" style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '2rem', maxWidth: '480px', fontWeight: 'normal', margin: '0 0 2rem 0' }}>
+            <Motion.div variants={item} style={{ display: 'inline-block', marginBottom: '1.25rem' }}>
+              <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-1)', letterSpacing: '0.5px' }}>
+                {t('hero.roleTitle')}
+              </span>
+            </Motion.div>
+
+            <Motion.p variants={item} className="hero-description" style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '2rem', maxWidth: '520px', fontWeight: 'normal', margin: '0 0 2rem 0' }}>
               {t('hero.descriptionStart')}
               <strong style={{ color: 'var(--text-primary)' }}>{t('hero.degree')}</strong>
               {t('hero.descriptionMiddle')}
@@ -90,7 +98,7 @@ export default function Hero() {
               {t('hero.descriptionAfterLlm')}
               <strong style={{ color: 'var(--accent-2)' }}>{t('hero.aiApps')}</strong>
               {t('hero.descriptionEnd')}
-            </Motion.h2>
+            </Motion.p>
 
             <Motion.div variants={item} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
               <a href="#contact" className="btn-primary">
@@ -102,11 +110,11 @@ export default function Hero() {
             </Motion.div>
 
             <Motion.div variants={item} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-              <a href="https://github.com/turkelibrahim" target="_blank" rel="noreferrer" className="social-btn">
+              <a href="https://github.com/turkelibrahim" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="İbrahim Türkel GitHub Profili">
                 <GithubIcon size={19} />
                 <span>GitHub</span>
               </a>
-              <a href="https://linkedin.com/in/ibrahim-türkel" target="_blank" rel="noreferrer" className="social-btn">
+              <a href="https://www.linkedin.com/in/ibrahim-t%C3%BCrkel-065283261" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="İbrahim Türkel LinkedIn Profili">
                 <LinkedinIcon size={19} />
                 <span>LinkedIn</span>
               </a>

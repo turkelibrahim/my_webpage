@@ -1,10 +1,11 @@
 {
-  "name": "İbrahim Türkel | AI Engineer & LLM Developer",
+  "name": "İbrahim Türkel | AI Developer & Bilgisayar Mühendisliği Öğrencisi",
   "short_name": "İbrahim Türkel",
+  "description": "İbrahim Türkel kişisel portfolyo ve yapay zekâ projeleri web sitesi.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#020617",
+  "theme_color": "#020617",
   "icons": [
     {
       "src": "/favicon.svg",

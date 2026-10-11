@@ -61,7 +61,13 @@ function CertCard({ cert, index }) {
       </div>
 
       {cert.credentialUrl && (
-        <a href={cert.credentialUrl} target="_blank" rel="noreferrer" style={{ color: meta.color, fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none', position: 'relative', zIndex: 1 }}>
+        <a 
+          href={cert.credentialUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          aria-label={`${cert.title} — ${t('common.viewCertificate')}`}
+          style={{ color: meta.color, fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none', position: 'relative', zIndex: 1 }}
+        >
           {t('common.viewCertificate')}
         </a>
       )}

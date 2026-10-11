@@ -32,7 +32,7 @@ export default function Contact() {
 
   const socials = [
     { icon: <GithubIcon size={20} />, label: 'GitHub', href: 'https://github.com/turkelibrahim', color: 'var(--text-primary)' },
-    { icon: <LinkedinIcon size={20} />, label: 'LinkedIn', href: 'https://linkedin.com/in/ibrahim-türkel', color: '#0a66c2' },
+    { icon: <LinkedinIcon size={20} />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/ibrahim-t%C3%BCrkel-065283261', color: '#0a66c2' },
     { icon: <Mail size={20} />, label: t('contact.email'), href: 'mailto:ibrahimturkel18@gmail.com', color: 'var(--accent-1)' },
   ];
 
@@ -104,7 +104,8 @@ export default function Contact() {
                   key={social.label}
                   href={social.href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
+                  aria-label={`${social.label} — İbrahim Türkel`}
                   style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 1rem', borderRadius: '10px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-secondary)', transition: 'all 0.2s', textDecoration: 'none' }}
                   onMouseOver={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.color = '#fff'; }}
                   onMouseOut={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
@@ -164,10 +165,10 @@ export default function Contact() {
         </Motion.div>
       </div>
 
-      <div style={{ textAlign: 'center', marginTop: '5rem', paddingBottom: '2rem', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+      <footer style={{ textAlign: 'center', marginTop: '5rem', paddingBottom: '2rem', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
         <div style={{ width: '60px', height: '1px', background: 'rgba(255,255,255,0.1)', margin: '0 auto 1.5rem' }} />
         © {new Date().getFullYear()} İbrahim Türkel · {t('contact.footerRights')}
-      </div>
+      </footer>
     </section>
   );
 }
