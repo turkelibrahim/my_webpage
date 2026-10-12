@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import ThreeBackground from './components/ThreeBackground';
+import BackgroundTheme from './components/BackgroundTheme';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -30,13 +30,13 @@ function App() {
         <meta property="og:title" content="İbrahim Türkel | AI Developer &amp; Bilgisayar Mühendisliği Öğrencisi" />
         <meta property="og:description" content="İbrahim Türkel — Ankara Bilim Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yapay zekâ, Python, otonom ajanlar ve LLM sistemleri portfolyosu." />
         <meta property="og:site_name" content="İbrahim Türkel" />
-        <meta property="og:image" content="https://ibrahimturkel.com.tr/it-logo.svg" />
+        <meta property="og:image" content="https://ibrahimturkel.com.tr/profile.jpg" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="İbrahim Türkel | AI Developer &amp; Bilgisayar Mühendisliği Öğrencisi" />
         <meta name="twitter:description" content="İbrahim Türkel — Ankara Bilim Üniversitesi Bilgisayar Mühendisliği öğrencisi. Yapay zekâ, Python, otonom ajanlar ve LLM sistemleri portfolyosu." />
-        <meta name="twitter:image" content="https://ibrahimturkel.com.tr/it-logo.svg" />
+        <meta name="twitter:image" content="https://ibrahimturkel.com.tr/profile.jpg" />
 
         {/* Security, PWA & Favicons */}
         <meta name="theme-color" content="#020617" />
@@ -50,7 +50,7 @@ function App() {
       </Helmet>
       <CustomCursor />
       <ScrollProgressBar />
-      <ThreeBackground />
+      <BackgroundTheme />
       <div id="app-content">
         <header>
           <Navbar />

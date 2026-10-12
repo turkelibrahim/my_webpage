@@ -68,11 +68,45 @@ export default function About() {
       <div className="grid-cols-2" style={{ gap: '2.5rem', alignItems: 'start', marginBottom: '3.5rem' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <Motion.div className="glass-panel" {...fadeUp(0.1)} style={{ padding: '2.25rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: '1.4rem' }}>
-              <div style={{ padding: '0.55rem', background: 'rgba(0,242,254,0.08)', borderRadius: '9px', color: 'var(--accent-1)' }}>
-                <Target size={18} />
+            <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+              <div 
+                style={{ 
+                  position: 'relative',
+                  width: '84px', 
+                  height: '84px', 
+                  borderRadius: '18px', 
+                  overflow: 'hidden',
+                  flexShrink: 0,
+                  border: '2px solid rgba(255, 255, 255, 0.16)',
+                  boxShadow: '0 12px 28px -6px rgba(0, 0, 0, 0.7), 0 0 16px rgba(56, 189, 248, 0.25)',
+                }}
+              >
+                <img 
+                  src="/profile.jpg" 
+                  alt="İbrahim Türkel — Portre Fotoğrafı ve Bilgisayar Mühendisliği Öğrencisi" 
+                  width="84"
+                  height="84"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                />
               </div>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff' }}>{t('about.careerGoalTitle')}</h3>
+              <div style={{ flex: 1, minWidth: '180px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
+                  <div style={{ padding: '0.35rem', background: 'rgba(56, 189, 248, 0.08)', borderRadius: '8px', color: '#38bdf8', display: 'inline-flex' }}>
+                    <Target size={14} />
+                  </div>
+                  <span style={{ fontSize: '0.74rem', color: '#38bdf8', fontWeight: 700, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.8px' }}>
+                    İBRAHİM TÜRKEL
+                  </span>
+                </div>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fff', margin: '0.15rem 0 0.25rem' }}>
+                  {t('about.careerGoalTitle')}
+                </h3>
+                <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                  Ankara Bilim Üniversitesi • Bilgisayar Mühendisliği
+                </span>
+              </div>
             </div>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '1.2rem', fontSize: '0.93rem' }}>
               {t('about.careerGoalText1Start')}

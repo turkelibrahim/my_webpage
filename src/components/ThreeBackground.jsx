@@ -7,8 +7,8 @@ function ParticleField() {
   const nearRef = useRef();
 
   const { positions, colors, nearPositions, nearColors } = useMemo(() => {
-    const count = 5200;
-    const nearCount = 700;
+    const count = 280;
+    const nearCount = 40;
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
     const nearPos = new Float32Array(nearCount * 3);
@@ -24,19 +24,19 @@ function ParticleField() {
       const v = random(pointIndex * 4 + 2);
       const theta = 2 * Math.PI * u;
       const phi = Math.acos(2 * v - 1);
-      const r = 7.2 * Math.cbrt(random(pointIndex * 4 + 3));
+      const r = 8.0 * Math.cbrt(random(pointIndex * 4 + 3));
 
       pos[i]   = r * Math.sin(phi) * Math.cos(theta);
       pos[i+1] = r * Math.sin(phi) * Math.sin(theta);
-      pos[i+2] = r * Math.cos(phi) - 1.4;
+      pos[i+2] = r * Math.cos(phi) - 1.2;
 
       const rng = random(pointIndex * 4 + 4);
-      if (rng < 0.5) {
-        col[i] = 0.32; col[i+1] = 0.95; col[i+2] = 1.0;
-      } else if (rng < 0.8) {
-        col[i] = 0.25; col[i+1] = 0.85; col[i+2] = 0.68;
+      if (rng < 0.65) {
+        col[i] = 0.88; col[i+1] = 0.94; col[i+2] = 1.0;
+      } else if (rng < 0.88) {
+        col[i] = 0.52; col[i+1] = 0.72; col[i+2] = 0.98;
       } else {
-        col[i] = 0.68; col[i+1] = 0.48; col[i+2] = 1.0;
+        col[i] = 0.65; col[i+1] = 0.58; col[i+2] = 0.96;
       }
     }
 
@@ -46,8 +46,8 @@ function ParticleField() {
       nearPos[i + 1] = (random(pointIndex * 5 + 2) - 0.5) * 5.6;
       nearPos[i + 2] = -random(pointIndex * 5 + 3) * 4.8;
 
-      nearCol[i] = 0.75;
-      nearCol[i + 1] = 0.98;
+      nearCol[i] = 0.92;
+      nearCol[i + 1] = 0.96;
       nearCol[i + 2] = 1;
     }
 

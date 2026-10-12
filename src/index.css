@@ -34,11 +34,109 @@ img { max-width: 100%; display: block; }
 ::-webkit-scrollbar-thumb { background: rgba(0, 242, 254, 0.2); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(0, 242, 254, 0.4); }
 
+/* ─── Cyber Aurora Arka Plan Katmanı ─────────────────────────────────────────── */
+.site-bg-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #070b16;
+}
+
+.aurora-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: #070b16;
+}
+
+.aurora-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+}
+
+.aurora-base-mesh {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 45% at 80% 25%, rgba(57, 91, 147, 0.28), transparent 42%),
+    radial-gradient(ellipse 65% 35% at 10% 100%, rgba(201, 250, 102, 0.08), transparent 36%),
+    #070b16;
+}
+
+.aurora-top-ambient {
+  position: absolute;
+  top: -15vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  max-width: 1250px;
+  height: 65vh;
+  background: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(99, 102, 241, 0.22) 0%, rgba(56, 189, 248, 0.12) 42%, transparent 75%);
+  filter: blur(65px);
+  pointer-events: none;
+}
+
+.aurora-ribbon-primary {
+  position: absolute;
+  top: 6vh;
+  left: 8vw;
+  width: 82vw;
+  height: 55vh;
+  background: 
+    radial-gradient(ellipse 65% 50% at 30% 40%, rgba(79, 70, 229, 0.24) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 45% at 72% 50%, rgba(14, 165, 233, 0.2) 0%, transparent 65%);
+  filter: blur(85px);
+  animation: aurora-silk-flow 22s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.aurora-ribbon-secondary {
+  position: absolute;
+  top: 14vh;
+  right: 12vw;
+  width: 65vw;
+  height: 52vh;
+  background: 
+    radial-gradient(ellipse 55% 45% at 60% 40%, rgba(147, 51, 234, 0.16) 0%, rgba(99, 102, 241, 0.12) 40%, transparent 70%);
+  filter: blur(95px);
+  animation: aurora-silk-drift 26s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.aurora-horizon-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35vh;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(56, 189, 248, 0.08) 0%, rgba(99, 102, 241, 0.05) 35%, transparent 70%);
+  filter: blur(55px);
+  pointer-events: none;
+}
+
+@keyframes aurora-silk-flow {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+  50% { transform: translate(35px, 18px) scale(1.06); opacity: 1; }
+  100% { transform: translate(-25px, 30px) scale(0.96); opacity: 0.9; }
+}
+
+@keyframes aurora-silk-drift {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.75; }
+  50% { transform: translate(-45px, 25px) scale(1.08); opacity: 0.95; }
+  100% { transform: translate(20px, -18px) scale(0.94); opacity: 0.8; }
+}
+
 /* ─── Three.js Layer ────────────────────────────────────────────────────────── */
 #canvas-container {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
-  z-index: 0; pointer-events: none;
+  z-index: 1; pointer-events: none;
   opacity: 1;
 }
 #canvas-container canvas { display: block; }

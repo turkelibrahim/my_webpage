@@ -34,7 +34,7 @@ export const translations = {
       roleTitle: 'AI Developer & Bilgisayar Mühendisliği Öğrencisi',
       descriptionStart: 'Ankara Bilim Üniversitesi ',
       degree: 'Bilgisayar Mühendisliği',
-      descriptionMiddle: ' 3. sınıf öğrencisiyim. ',
+      descriptionMiddle: ' 4. sınıf öğrencisiyim. ',
       llm: 'Yapay zekâ geliştirme, Python, otonom ajanlar',
       descriptionAfterLlm: ' ve ',
       aiApps: 'büyük dil modelleri (LLM)',
@@ -46,7 +46,7 @@ export const translations = {
       stats: [
         { end: 4, suffix: '+', label: 'AI Proje' },
         { end: 8, suffix: '+', label: 'Teknoloji' },
-        { end: 3, suffix: '', label: 'Sınıf' },
+        { end: 4, suffix: '', label: 'Sınıf' },
         { end: 2027, suffix: '', label: 'Mezuniyet' },
       ],
     },
@@ -89,7 +89,7 @@ export const translations = {
           year: '2022 - Günümüz',
           title: 'Ankara Bilim Üniversitesi',
           subtitle: 'Bilgisayar Mühendisliği (%100 İngilizce)',
-          desc: '3. sınıf öğrencisi. AI, makine öğrenmesi, veri yapıları, algoritmalar ve veritabanı sistemlerine odaklanıyor.',
+          desc: '4. sınıf öğrencisi. AI, makine öğrenmesi, veri yapıları, algoritmalar ve veritabanı sistemlerine odaklanıyor.',
         },
         {
           year: 'Ağu 2020 - Eyl 2023',
@@ -444,7 +444,7 @@ export const translations = {
       greeting: 'Hi, I am',
       name: 'İbrahim Türkel',
       roleTitle: 'AI Developer & Computer Engineering Student',
-      descriptionStart: 'I am a 3rd-year ',
+      descriptionStart: 'I am a 4th-year ',
       degree: 'Computer Engineering',
       descriptionMiddle: ' student at Ankara Science University. I focus on ',
       llm: 'artificial intelligence, Python, autonomous agents',
@@ -458,7 +458,7 @@ export const translations = {
       stats: [
         { end: 4, suffix: '+', label: 'AI Projects' },
         { end: 8, suffix: '+', label: 'Technologies' },
-        { end: 3, suffix: '', label: 'Year' },
+        { end: 4, suffix: '', label: 'Year' },
         { end: 2027, suffix: '', label: 'Graduation' },
       ],
     },
@@ -501,7 +501,7 @@ export const translations = {
           year: '2022 - Present',
           title: 'Ankara Science University',
           subtitle: 'Computer Engineering (100% English)',
-          desc: '3rd-year student focused on AI, machine learning, data structures, algorithms, and database systems.',
+          desc: '4th-year student focused on AI, machine learning, data structures, algorithms, and database systems.',
         },
         {
           year: 'Aug 2020 - Sep 2023',

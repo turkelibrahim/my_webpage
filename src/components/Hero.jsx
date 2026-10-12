@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion as Motion } from 'framer-motion';
-import { Download, Mail, Terminal, ArrowDown } from 'lucide-react';
+import { Download, Mail, Terminal, ArrowDown, Sparkles } from 'lucide-react';
 import { useLanguage } from '../i18n/useLanguage';
 
 const GithubIcon = ({ size = 19 }) => (
@@ -70,33 +70,86 @@ export default function Hero() {
       <div className="container" style={{ position: 'relative', zIndex: 10 }}>
         <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center', maxWidth: '1100px', margin: '0 auto' }}>
           <Motion.div variants={container} initial="hidden" animate="visible">
-            <Motion.div variants={item} style={{ marginBottom: '1.25rem' }}>
+            
+            {/* Status Pill & Profile Avatar */}
+            <Motion.div 
+              variants={item} 
+              style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '1.4rem', flexWrap: 'wrap' }}
+            >
+              <div style={{ position: 'relative', width: '100px', height: '100px', flexShrink: 0 }}>
+                <img 
+                  src="/profile.jpg" 
+                  alt="İbrahim Türkel — AI Developer & Bilgisayar Mühendisliği Öğrencisi Profil Fotoğrafı" 
+                  width="100"
+                  height="100"
+                  loading="eager"
+                  fetchPriority="high"
+                  style={{ 
+                    width: '100px', 
+                    height: '100px', 
+                    borderRadius: '50%', 
+                    objectFit: 'cover', 
+                    border: '3px solid rgba(56, 189, 248, 0.5)',
+                    boxShadow: '0 0 28px rgba(56, 189, 248, 0.38), 0 10px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                    display: 'block'
+                  }} 
+                />
+                <span 
+                  style={{
+                    position: 'absolute',
+                    bottom: '3px',
+                    right: '3px',
+                    width: '17px',
+                    height: '17px',
+                    borderRadius: '50%',
+                    background: '#10b981',
+                    border: '2.5px solid #07090e',
+                    boxShadow: '0 0 8px #10b981'
+                  }} 
+                />
+              </div>
+
               <span className="hero-available-badge">
                 <span className="hero-available-dot" />
                 {t('hero.availability')}
               </span>
             </Motion.div>
 
-            <Motion.h1 variants={item} className="hero-title" style={{ fontSize: 'clamp(2.6rem, 4vw, 3.8rem)', fontWeight: 800, lineHeight: 1.08, marginBottom: '0.75rem' }}>
-              <span style={{ display: 'block', fontSize: '0.45em', fontWeight: 500, letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>
+            <Motion.h1 variants={item} className="hero-title" style={{ fontSize: 'clamp(2.8rem, 4.4vw, 4.2rem)', fontWeight: 800, lineHeight: 1.05, marginBottom: '1rem', letterSpacing: '-0.035em' }}>
+              <span style={{ display: 'block', fontSize: '0.42em', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.45rem' }}>
                 {t('hero.greeting')}
               </span>
               <span className="text-gradient">{t('hero.name')}</span>
             </Motion.h1>
 
-            <Motion.div variants={item} style={{ display: 'inline-block', marginBottom: '1.25rem' }}>
-              <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-1)', letterSpacing: '0.5px' }}>
+            <Motion.div variants={item} style={{ marginBottom: '1.4rem' }}>
+              <span 
+                style={{ 
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  fontSize: '1.02rem', 
+                  fontWeight: 600, 
+                  color: '#38bdf8', 
+                  letterSpacing: '0.2px',
+                  background: 'rgba(56, 189, 248, 0.08)',
+                  padding: '0.35rem 0.9rem',
+                  borderRadius: '8px',
+                  border: '1px solid rgba(56, 189, 248, 0.2)'
+                }}
+              >
+                <Sparkles size={15} color="#38bdf8" />
                 {t('hero.roleTitle')}
               </span>
             </Motion.div>
 
-            <Motion.p variants={item} className="hero-description" style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '2rem', maxWidth: '520px', fontWeight: 'normal', margin: '0 0 2rem 0' }}>
+            <Motion.p variants={item} className="hero-description" style={{ fontSize: '1.04rem', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '2.25rem', maxWidth: '540px' }}>
               {t('hero.descriptionStart')}
               <strong style={{ color: 'var(--text-primary)' }}>{t('hero.degree')}</strong>
               {t('hero.descriptionMiddle')}
-              <strong style={{ color: 'var(--accent-1)' }}>{t('hero.llm')}</strong>
+              <strong style={{ color: '#38bdf8' }}>{t('hero.llm')}</strong>
               {t('hero.descriptionAfterLlm')}
-              <strong style={{ color: 'var(--accent-2)' }}>{t('hero.aiApps')}</strong>
+              <strong style={{ color: '#818cf8' }}>{t('hero.aiApps')}</strong>
               {t('hero.descriptionEnd')}
             </Motion.p>
 
