@@ -1,0 +1,15 @@
+{
+  "name": "ibrahim-turkel-portfolio",
+  "private": true,
+  "version": "6.0.0",
+  "description": "Compact editorial dashboard portfolio for İbrahim Türkel",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs . 5175",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs docs 4176"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

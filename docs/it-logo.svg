@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 64">
+  <defs>
+    <linearGradient id="logoBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#133825"/>
+      <stop offset="55%" stop-color="#0a2015"/>
+      <stop offset="100%" stop-color="#05110b"/>
+    </linearGradient>
+    <linearGradient id="logoBorderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="50%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#d4955a"/>
+    </linearGradient>
+    <linearGradient id="logoEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6ee7b7"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3c68f"/>
+      <stop offset="100%" stop-color="#c68346"/>
+    </linearGradient>
+    <linearGradient id="logoIvory" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e6efe9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Left Monogram Emblem (52x52) -->
+  <g transform="translate(6, 6)">
+    <rect x="0" y="0" width="52" height="52" rx="13" fill="url(#logoBgGrad)" stroke="url(#logoBorderGrad)" stroke-width="2"/>
+    <path d="M9 15.5V9H15.5" fill="none" stroke="url(#logoEmerald)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+    <path d="M43 36.5V43H36.5" fill="none" stroke="url(#logoGold)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+    <circle cx="16.8" cy="13" r="3.5" fill="url(#logoEmerald)"/>
+    <rect x="13.5" y="19" width="6.6" height="20.5" rx="2.1" fill="url(#logoIvory)"/>
+    <rect x="20.1" y="26.5" width="4.4" height="2.4" rx="0.8" fill="url(#logoGold)"/>
+    <rect x="23" y="19" width="18" height="6.2" rx="2" fill="url(#logoIvory)"/>
+    <rect x="28.8" y="25.2" width="6.6" height="14.3" rx="2.1" fill="url(#logoIvory)"/>
+  </g>
+
+  <!-- Editorial Brand Wordmark -->
+  <text x="72" y="33" font-family="'Newsreader', Georgia, serif" font-size="22" font-weight="600" fill="#17231c" letter-spacing="-0.02em">
+    İbrahim <tspan fill="#1b3c2a" font-style="italic">Türkel</tspan>
+  </text>
+  <text x="73" y="49" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9.5" font-weight="700" fill="#b37446" letter-spacing="0.16em">
+    AI DEVELOPER · COMPUTER ENGINEERING
+  </text>
+</svg>

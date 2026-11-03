@@ -1,0 +1,256 @@
+{
+  "timestamp": "2026-11-03T08:13:35.042Z",
+  "summary": {
+    "passed": 41,
+    "warnings": 0,
+    "failed": 0
+  },
+  "results": [
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /../package.json",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /..%2fpackage.json",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /%2e%2e/package.json",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /%2e%2e%2fpackage.json",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /..%5cpackage.json",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /%2e%2e%5cpackage.json",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /..%252f..%252fpackage.json",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /../../../../../../../../Windows/win.ini",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /..%2f..%2f..%2f..%2fWindows%2fwin.ini",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /..%5c..%5c..%5c..%5cWindows%5cwin.ini",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /....//....//....//Windows/win.ini",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Path Traversal",
+      "testName": "Payload: /index.html%00.jpg",
+      "status": "PASS",
+      "details": "Blocked with HTTP 400"
+    },
+    {
+      "category": "Dotfile Access",
+      "testName": "Hidden file /.gitignore",
+      "status": "PASS",
+      "details": "Protected (HTTP 400)"
+    },
+    {
+      "category": "Dotfile Access",
+      "testName": "Hidden file /.git/config",
+      "status": "PASS",
+      "details": "Protected (HTTP 400)"
+    },
+    {
+      "category": "Dotfile Access",
+      "testName": "Hidden file /.env",
+      "status": "PASS",
+      "details": "Protected (HTTP 400)"
+    },
+    {
+      "category": "Dotfile Access",
+      "testName": "Hidden file /.env.local",
+      "status": "PASS",
+      "details": "Protected (HTTP 400)"
+    },
+    {
+      "category": "Dotfile Access",
+      "testName": "Hidden file /.DS_Store",
+      "status": "PASS",
+      "details": "Protected (HTTP 400)"
+    },
+    {
+      "category": "Dotfile Access",
+      "testName": "Hidden file /.vscode/settings.json",
+      "status": "PASS",
+      "details": "Protected (HTTP 400)"
+    },
+    {
+      "category": "Security Headers",
+      "testName": "X-Content-Type-Options: nosniff",
+      "status": "PASS",
+      "details": "Present"
+    },
+    {
+      "category": "Security Headers",
+      "testName": "Referrer-Policy",
+      "status": "PASS",
+      "details": "Present: strict-origin-when-cross-origin"
+    },
+    {
+      "category": "Security Headers",
+      "testName": "X-Frame-Options (Clickjacking)",
+      "status": "PASS",
+      "details": "Present: DENY"
+    },
+    {
+      "category": "Security Headers",
+      "testName": "Content-Security-Policy",
+      "status": "PASS",
+      "details": "Present"
+    },
+    {
+      "category": "Security Headers",
+      "testName": "Permissions-Policy",
+      "status": "PASS",
+      "details": "Present"
+    },
+    {
+      "category": "HTTP Methods",
+      "testName": "Method POST handling",
+      "status": "PASS",
+      "details": "Returned HTTP 405"
+    },
+    {
+      "category": "HTTP Methods",
+      "testName": "Method PUT handling",
+      "status": "PASS",
+      "details": "Returned HTTP 405"
+    },
+    {
+      "category": "HTTP Methods",
+      "testName": "Method DELETE handling",
+      "status": "PASS",
+      "details": "Returned HTTP 405"
+    },
+    {
+      "category": "HTTP Methods",
+      "testName": "Method PATCH handling",
+      "status": "PASS",
+      "details": "Returned HTTP 405"
+    },
+    {
+      "category": "Input Validation",
+      "testName": "Invalid percent-encoding %c0%af",
+      "status": "PASS",
+      "details": "Safely returned 400 Bad Request"
+    },
+    {
+      "category": "Input Validation",
+      "testName": "CRLF Header injection in path",
+      "status": "PASS",
+      "details": "Handled (HTTP 400)"
+    },
+    {
+      "category": "Input Validation",
+      "testName": "Oversized URI (4000 chars)",
+      "status": "PASS",
+      "details": "Handled gracefully (HTTP 400)"
+    },
+    {
+      "category": "DOM XSS (Sinks)",
+      "testName": "No innerHTML assignment found in code",
+      "status": "PASS",
+      "details": "Clean"
+    },
+    {
+      "category": "DOM XSS (Sinks)",
+      "testName": "No outerHTML assignment found in code",
+      "status": "PASS",
+      "details": "Clean"
+    },
+    {
+      "category": "DOM XSS (Sinks)",
+      "testName": "No document.write() found in code",
+      "status": "PASS",
+      "details": "Clean"
+    },
+    {
+      "category": "DOM XSS (Sinks)",
+      "testName": "No eval() found in code",
+      "status": "PASS",
+      "details": "Clean"
+    },
+    {
+      "category": "DOM XSS (Sinks)",
+      "testName": "No new Function() found in code",
+      "status": "PASS",
+      "details": "Clean"
+    },
+    {
+      "category": "DOM XSS (Sinks)",
+      "testName": "No setTimeout string evaluation found in code",
+      "status": "PASS",
+      "details": "Clean"
+    },
+    {
+      "category": "DOM XSS (Sinks)",
+      "testName": "No setInterval string evaluation found in code",
+      "status": "PASS",
+      "details": "Clean"
+    },
+    {
+      "category": "Reverse Tabnabbing",
+      "testName": "All target=\"_blank\" links have rel=\"noopener noreferrer\"",
+      "status": "PASS",
+      "details": "All external links are protected"
+    },
+    {
+      "category": "HTML Meta",
+      "testName": "Character encoding is explicitly set to UTF-8",
+      "status": "PASS",
+      "details": "Configured"
+    },
+    {
+      "category": "Form Security",
+      "testName": "Input fields enforce maxlength boundaries",
+      "status": "PASS",
+      "details": "Configured"
+    },
+    {
+      "category": "Secrets Scan",
+      "testName": "No hardcoded credentials, API keys, or private keys found",
+      "status": "PASS",
+      "details": "Clean"
+    }
+  ]
+}

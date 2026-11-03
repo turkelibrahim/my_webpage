@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://ibrahimturkel.com.tr/</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://ibrahimturkel.com.tr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ibrahimturkel.com.tr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ibrahimturkel.com.tr/"/>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ibrahimturkel.com.tr/profile.jpg</image:loc>
+      <image:title>İbrahim Türkel — AI Developer &amp; Bilgisayar Mühendisi</image:title>
+      <image:caption>İbrahim Türkel resmi portfolyo ve profil fotoğrafı (Ankara Bilim Üniversitesi Bilgisayar Mühendisliği)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ibrahimturkel.com.tr/ai-company-dashboard.png</image:loc>
+      <image:title>İbrahim Türkel — AI_COMPANY_OS Multi-Agent Operating System</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ibrahimturkel.com.tr/aurahome-dashboard.webp</image:loc>
+      <image:title>İbrahim Türkel — AuraHome Smart Home &amp; IoT Dashboard</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ibrahimturkel.com.tr/ottoman-project.webp</image:loc>
+      <image:title>İbrahim Türkel — Intelligent Ottoman Turkish OCR Assistant</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ibrahimturkel.com.tr/Ibrahim_Turkel_tr_CV.pdf</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ibrahimturkel.com.tr/Ibrahim_Turkel_en_CV.pdf</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
