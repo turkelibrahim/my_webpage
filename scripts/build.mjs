@@ -14,6 +14,7 @@ const required = [
   'public/aurahome-dashboard.webp',
   'public/ottoman-project.webp',
   'public/smart-newspaper-dashboard.webp',
+  'public/quiz-platform-dashboard.webp',
   'public/english-login.webp',
   'public/english-welcome.webp',
   'public/english-placement.webp',
@@ -45,7 +46,7 @@ fs.writeFileSync(path.join(output, '.nojekyll'), '');
 const expected = [
   'index.html', 'src/site.css', 'src/site.js', 'profile.jpg',
   'Ibrahim_Turkel_tr_CV.pdf', 'Ibrahim_Turkel_en_CV.pdf', 'aurahome-dashboard.webp',
-  'ottoman-project.webp', 'smart-newspaper-dashboard.webp',
+  'ottoman-project.webp', 'smart-newspaper-dashboard.webp', 'quiz-platform-dashboard.webp',
   'english-login.webp', 'english-welcome.webp', 'english-placement.webp',
   'english-notebook.webp', 'english-progress.webp', 'english-favorites.webp',
   'english-admin-dashboard.webp', 'english-admin-tests.webp', 'english-admin-students.webp',
