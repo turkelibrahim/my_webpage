@@ -121,13 +121,14 @@
     const cvLinks = [...document.querySelectorAll('.cv-download-link')];
     cvLinks.forEach((link) => {
       const targetHref = language === 'en'
-        ? (link.dataset.enHref || '/Ibrahim_Turkel_en_CV.pdf?v=6.5')
-        : (link.dataset.trHref || '/Ibrahim_Turkel_tr_CV.pdf?v=6.5');
+        ? (link.dataset.enHref || '/Ibrahim_Turkel_en_CV.pdf?v=6.6')
+        : (link.dataset.trHref || '/Ibrahim_Turkel_tr_CV.pdf?v=6.6');
       link.setAttribute('href', targetHref);
     });
 
     const activeId = document.querySelector('.main-nav a.active')?.getAttribute('href')?.slice(1) || 'home';
     setActiveSection(activeId);
+    if (typeof updateEnglishGalleryUI === 'function') updateEnglishGalleryUI();
   }
 
   languageButtons.forEach((button) => button.addEventListener('click', () => setLanguage(button.dataset.language)));
@@ -135,8 +136,8 @@
   document.querySelectorAll('.cv-download-link').forEach((link) => {
     link.addEventListener('click', () => {
       const targetHref = currentLanguage === 'en'
-        ? (link.dataset.enHref || '/Ibrahim_Turkel_en_CV.pdf?v=6.5')
-        : (link.dataset.trHref || '/Ibrahim_Turkel_tr_CV.pdf?v=6.5');
+        ? (link.dataset.enHref || '/Ibrahim_Turkel_en_CV.pdf?v=6.6')
+        : (link.dataset.trHref || '/Ibrahim_Turkel_tr_CV.pdf?v=6.6');
       link.setAttribute('href', targetHref);
     });
   });
@@ -407,6 +408,144 @@
 
   const year = document.querySelector('[data-current-year]');
   if (year) year.textContent = new Date().getFullYear();
+
+  // -------------------------------------------------------------
+  // AI-Powered English Platform Multi-Screen Gallery (Student & Admin)
+  // -------------------------------------------------------------
+  const englishSlides = [
+    { src: '/english-login.webp', group: 'student', tr: 'Giriş & Admin Portalı', en: 'Login & Admin Portal' },
+    { src: '/english-welcome.webp', group: 'student', tr: 'Öğrenci · Karşılama & Günün Sözü', en: 'Student · Welcome & Quote of the Day' },
+    { src: '/english-placement.webp', group: 'student', tr: 'Öğrenci · Seviye Tespit Sınavı (Placement)', en: 'Student · Quick Placement Test' },
+    { src: '/english-notebook.webp', group: 'student', tr: 'Öğrenci · Kelime ve Not Defteri (Notebook)', en: 'Student · Vocabulary & Notes Notebook' },
+    { src: '/english-progress.webp', group: 'student', tr: 'Öğrenci · İlerleme, Rozetler ve Başarımlar', en: 'Student · Progress, Badges & Accuracy' },
+    { src: '/english-favorites.webp', group: 'student', tr: 'Öğrenci · Favori Dersler ve Sorular', en: 'Student · Favorited Lessons & Questions' },
+    { src: '/english-admin-dashboard.webp', group: 'admin', tr: 'Admin Paneli · Genel Bakış & Seviye Dağılımı', en: 'Admin Panel · Overview & Level Distribution' },
+    { src: '/english-admin-tests.webp', group: 'admin', tr: 'Admin Paneli · Gemini AI ile Test Üretimi', en: 'Admin Panel · AI Test Generator (Gemini)' },
+    { src: '/english-admin-students.webp', group: 'admin', tr: 'Admin Paneli · Öğrenci Arama ve Hesap Yönetimi', en: 'Admin Panel · Student Search & Account Management' },
+  ];
+
+  let englishIndex = 0;
+  const galleryCard = document.querySelector('[data-gallery="english-platform"]');
+  const lightbox = document.querySelector('#gallery-lightbox');
+  const lightboxImg = document.querySelector('#lightbox-img');
+  const lightboxCaption = document.querySelector('#lightbox-caption');
+  const lightboxCounter = document.querySelector('#lightbox-counter');
+
+  function updateEnglishGalleryUI() {
+    const slide = englishSlides[englishIndex];
+    if (!slide) return;
+    const captionText = currentLanguage === 'en' ? slide.en : slide.tr;
+    const countText = `${englishIndex + 1} / ${englishSlides.length}`;
+
+    if (galleryCard) {
+      const mainImg = galleryCard.querySelector('.gallery-main-img');
+      const captionEl = galleryCard.querySelector('.gallery-caption');
+      const counterEl = galleryCard.querySelector('.gallery-counter');
+      const groupPills = [...galleryCard.querySelectorAll('[data-gallery-group]')];
+
+      if (mainImg) {
+        mainImg.src = slide.src;
+        mainImg.alt = `AI-Powered English Platform — ${captionText}`;
+      }
+      if (captionEl) {
+        captionEl.textContent = captionText;
+        captionEl.setAttribute('data-tr', slide.tr);
+        captionEl.setAttribute('data-en', slide.en);
+      }
+      if (counterEl) counterEl.textContent = countText;
+      groupPills.forEach((pill) => {
+        pill.classList.toggle('active', pill.dataset.galleryGroup === slide.group);
+      });
+    }
+
+    if (lightbox && !lightbox.hidden) {
+      if (lightboxImg) {
+        lightboxImg.src = slide.src;
+        lightboxImg.alt = `AI-Powered English Platform — ${captionText}`;
+      }
+      if (lightboxCaption) lightboxCaption.textContent = captionText;
+      if (lightboxCounter) lightboxCounter.textContent = countText;
+      const lbPills = [...lightbox.querySelectorAll('[data-lightbox-group]')];
+      lbPills.forEach((pill) => {
+        pill.classList.toggle('active', pill.dataset.lightboxGroup === slide.group);
+      });
+    }
+  }
+
+  function stepEnglishGallery(delta) {
+    englishIndex = (englishIndex + delta + englishSlides.length) % englishSlides.length;
+    updateEnglishGalleryUI();
+  }
+
+  function selectEnglishGroup(group) {
+    const idx = englishSlides.findIndex((s) => s.group === group);
+    if (idx !== -1) {
+      englishIndex = idx;
+      updateEnglishGalleryUI();
+    }
+  }
+
+  function openLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = false;
+    lightbox.setAttribute('aria-hidden', 'false');
+    updateEnglishGalleryUI();
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = true;
+    lightbox.setAttribute('aria-hidden', 'true');
+  }
+
+  if (galleryCard) {
+    const prevBtn = galleryCard.querySelector('.gallery-prev');
+    const nextBtn = galleryCard.querySelector('.gallery-next');
+    const zoomBtn = galleryCard.querySelector('.gallery-zoom-btn');
+    const mainImg = galleryCard.querySelector('.gallery-main-img');
+    const groupPills = [...galleryCard.querySelectorAll('[data-gallery-group]')];
+
+    prevBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      stepEnglishGallery(-1);
+    });
+    nextBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      stepEnglishGallery(1);
+    });
+    zoomBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openLightbox();
+    });
+    mainImg?.addEventListener('click', () => openLightbox());
+    groupPills.forEach((pill) => {
+      pill.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectEnglishGroup(pill.dataset.galleryGroup);
+      });
+    });
+  }
+
+  document.querySelectorAll('[data-open-gallery="english-platform"]').forEach((btn) => {
+    btn.addEventListener('click', () => openLightbox());
+  });
+
+  if (lightbox) {
+    lightbox.querySelectorAll('[data-lightbox-close]').forEach((el) => {
+      el.addEventListener('click', () => closeLightbox());
+    });
+    document.querySelector('#lightbox-prev')?.addEventListener('click', () => stepEnglishGallery(-1));
+    document.querySelector('#lightbox-next')?.addEventListener('click', () => stepEnglishGallery(1));
+    lightbox.querySelectorAll('[data-lightbox-group]').forEach((pill) => {
+      pill.addEventListener('click', () => selectEnglishGroup(pill.dataset.lightboxGroup));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') stepEnglishGallery(-1);
+      if (e.key === 'ArrowRight') stepEnglishGallery(1);
+    });
+  }
 
   setLanguage(currentLanguage);
 })();
